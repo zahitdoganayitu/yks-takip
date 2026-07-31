@@ -1141,5 +1141,9 @@ function showView(v){
   window.scrollTo(0,0);
 }
 document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+
+// çevrimdışı destek — file:// ile açıldığında sessizce atlanır
+if("serviceWorker" in navigator)
+  addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script>
 </html>
