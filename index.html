@@ -320,6 +320,59 @@ thead th.c{text-align:center}
 .hedef-kart .ht{flex:1;min-width:0}
 .hedef-kart b{display:block;font-size:var(--fs-base);line-height:var(--lh-ui);font-weight:var(--fw-bold)}
 .hedef-kart small{color:var(--dim);font-size:var(--fs-xs);line-height:var(--lh-help)}
+
+/* ===== Bugün ne çalışayım (açılır/kapanır) ===== */
+.bugun{background:var(--surf-1);border:1px solid var(--line);border-radius:var(--r-lg);margin-bottom:var(--sp-4);box-shadow:var(--e1);overflow:hidden}
+.bugun>summary{list-style:none;cursor:pointer;padding:var(--sp-3) var(--sp-4);display:flex;align-items:center;gap:var(--sp-2);user-select:none;min-height:var(--hit);font-weight:var(--fw-bold);font-size:var(--fs-base)}
+.bugun>summary::-webkit-details-marker{display:none}
+.bugun .bico{font-size:18px}
+.bugun .bsp{flex:1}
+.bugun .barrow{color:var(--dim);font-size:12px;transition:transform var(--t-base) var(--ease-fill)}
+.bugun[open] .barrow{transform:rotate(90deg)}
+.bugun-liste{padding:0 var(--sp-4) var(--sp-4)}
+.bugun-bos{color:var(--dim);font-size:var(--fs-sm);padding-bottom:var(--sp-3)}
+.bg-item{display:flex;align-items:center;gap:var(--sp-3);width:100%;text-align:left;padding:var(--sp-3);margin-bottom:var(--sp-2);border:1px solid var(--line);border-radius:var(--r-md);background:var(--surf-2);color:var(--txt);cursor:pointer;min-height:var(--hit)}
+.bg-item:last-child{margin-bottom:0}
+.bg-item:hover{border-color:var(--sc,var(--accent))}
+.bg-ico{width:34px;height:34px;border-radius:var(--r-sm);display:grid;place-items:center;font-size:17px;flex-shrink:0;
+  background:color-mix(in srgb,var(--sc) 20%,transparent);border:1px solid color-mix(in srgb,var(--sc) 45%,transparent)}
+.bg-txt{flex:1;min-width:0}
+.bg-konu{font-weight:var(--fw-semibold);font-size:var(--fs-sm);line-height:var(--lh-ui)}
+.bg-ders{display:block;font-size:var(--fs-2xs);color:var(--dim);margin-top:1px}
+.bg-rozet{font-size:var(--fs-2xs);font-weight:var(--fw-bold);color:var(--sc);white-space:nowrap}
+.konu-vurgu{animation:vurgu 1.6s var(--ease-in)}
+@keyframes vurgu{0%,70%{background:color-mix(in srgb,var(--accent) 22%,transparent)}100%{background:transparent}}
+
+/* tekrar rozeti */
+.tzl{display:inline-flex;align-items:center;gap:3px;font-size:var(--fs-2xs);font-weight:var(--fw-semibold);
+  color:var(--warm);border:1px solid color-mix(in srgb,var(--warm) 40%,transparent);
+  background:color-mix(in srgb,var(--warm) 12%,transparent);border-radius:var(--r-pill);padding:1px 7px;margin-left:6px;white-space:nowrap}
+
+/* kalibrasyon kartı */
+.kal-row{display:grid;grid-template-columns:1fr auto;gap:4px var(--sp-3);padding:var(--sp-3) 0;border-top:1px solid var(--line)}
+.kal-row:first-child{border-top:0}
+.kal-ders{font-size:var(--fs-sm);font-weight:var(--fw-semibold)}
+.kal-say{font-size:var(--fs-xs);color:var(--dim);font-variant-numeric:tabular-nums lining-nums}
+.kal-bar{grid-column:1/-1;position:relative;height:8px;background:var(--surf-3);border-radius:var(--r-pill);overflow:hidden}
+.kal-bar>i{position:absolute;inset:0 auto 0 0;border-radius:var(--r-pill)}
+.kal-bar>.kb-oz{background:color-mix(in srgb,var(--accent) 55%,transparent)}
+.kal-bar>.kb-ger{background:var(--good);height:4px;top:2px}
+.kal-not{grid-column:1/-1;font-size:var(--fs-xs);color:var(--dim);line-height:var(--lh-help);margin-top:2px;
+  padding:var(--sp-2) var(--sp-3);background:color-mix(in srgb,var(--warn) 10%,transparent);
+  border-left:3px solid color-mix(in srgb,var(--warn) 55%,transparent);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.kal-lgnd{display:flex;gap:var(--sp-4);font-size:var(--fs-2xs);color:var(--dim);margin-bottom:var(--sp-3)}
+.kal-lgnd i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:5px;vertical-align:middle}
+
+/* deneme hata etiketi */
+.dn-neden{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.dn-neden[hidden]{display:none}
+.dn-neden .nlbl{font-size:var(--fs-2xs);color:var(--dim);width:100%;margin-bottom:2px}
+.nd-chip{border:1px solid var(--line);background:transparent;color:var(--dim);border-radius:var(--r-pill);
+  padding:5px 10px;font-size:var(--fs-2xs);font-weight:var(--fw-semibold);cursor:pointer;min-height:32px}
+.nd-chip:hover{border-color:var(--accent);color:var(--txt)}
+.nd-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.dn-tag{font-size:var(--fs-2xs);color:var(--dim);border:1px solid var(--line);border-radius:var(--r-pill);padding:2px 8px;white-space:nowrap}
+
 @media(max-width:640px){
   .setcard{padding:14px 16px}
 }
@@ -345,6 +398,10 @@ thead th.c{text-align:center}
       <button class="tab on" data-exam="TYT">TYT</button>
       <button class="tab" data-exam="AYT">AYT</button>
     </div>
+    <details class="bugun" id="bugunKart">
+      <summary><span class="bico" aria-hidden="true">🎯</span><span class="bsp">Bugün ne çalışayım?</span><span class="barrow">▶</span></summary>
+      <div class="bugun-liste" id="bugunListe"></div>
+    </details>
     <div id="list"></div>
     <div class="tools">
       <button id="collapse">Tümünü kapat</button>
@@ -362,6 +419,10 @@ thead th.c{text-align:center}
     <div class="card-block">
       <h2>Genel İlerleme</h2>
       <div class="gi" id="giWrap"></div>
+    </div>
+    <div class="card-block">
+      <h2>Kendini Değerlendirme <small class="hm-sub">(denemelerinle karşılaştırma)</small></h2>
+      <div id="kalibrasyon"></div>
     </div>
     <div class="card-block">
       <h2>Ders Bazlı Öğrenme</h2>
@@ -524,6 +585,13 @@ const META={
 };
 const meta=d=>META[d]||["📚","#6c8cff"];
 
+// ders başına yaklaşık soru sayısı (ÖSYM dağılımı) — "bugün ne çalışayım" sıralamasında ağırlık
+const AGIRLIK={
+ TYT:{"Türkçe":40,"Matematik":30,"Geometri":10,"Fizik":7,"Kimya":7,"Biyoloji":6,"Tarih":5,"Coğrafya":5,"Felsefe":5,"Din Kültürü":5},
+ AYT:{"Matematik":30,"Geometri (AYT)":10,"Fizik":14,"Kimya":13,"Biyoloji":13,"Edebiyat":24,"Tarih":21,"Coğrafya":17,"Felsefe Grubu":12,"Din Kültürü":6}
+};
+const agirlik=(ex,d)=>(AGIRLIK[ex]||{})[d]||5;
+
 const KEY="yks_takip_v1";
 let state=JSON.parse(localStorage.getItem(KEY)||"{}");
 let exam="TYT";
@@ -538,6 +606,15 @@ const rec=k=>state[k]||(state[k]={s:0,t:0,m:0}); // s:çalıştı t:test-sayıs�
 // konu ilerleme skoru 0-100: çalıştı(30) + test var(20) + mastery(50)
 function score(r){return (r.s?30:0)+(r.t>0?20:0)+r.m*0.5}
 
+// Tekrar zamanı geldi mi? İlk çalışmadan 7, sonrakilerden 30 gün sonra (unutma eğrisi ilk günlerde dik).
+// Kullanıcı tek rozet görür; kademe arkada kalır.
+function tazeleme(r){
+  if(!r||!r.s||!r.last)return false;
+  return (Date.now()-r.last)/86400000 >= (r.s>=2?30:7);
+}
+console.assert(tazeleme({s:1,last:Date.now()-8*86400000}) && !tazeleme({s:2,last:Date.now()-8*86400000}),
+  "tazeleme eşikleri bozuk (1. çalışma 7 gün, 2+ çalışma 30 gün)");
+
 function render(){
   const list=document.getElementById("list");
   list.innerHTML="";
@@ -551,7 +628,7 @@ function render(){
     const rows=topics.map(t=>{
       const k=id(exam,d,t), r=rec(k); sum+=score(r); if(r.s)done++;
       return `<tr class="topic" data-k="${k}">
-        <td class="tname">${t}</td>
+        <td class="tname"><span class="tn">${t}</span>${tazeleme(r)?'<span class="tzl">⏳ tazelemeye hazır</span>':''}</td>
         <td class="c"><span class="rep ${r.s?'has':''}">
           <button class="rep-minus" data-a="s-" aria-label="${t} çalışma sayısını azalt" tabindex="${r.s?0:-1}">−</button>
           <button class="chk ${r.s?'on':''}" data-a="s" aria-label="${t} — ${r.s||0} kez çalıştım, artırmak için tıkla">${r.s||""}</button>
@@ -581,8 +658,43 @@ function render(){
     list.appendChild(det);
   }
   document.getElementById("reset").textContent=exam+"'yi sıfırla";
+  renderBugun();
   dash();
 }
+
+// ---- "Bugün ne çalışayım": ders ağırlığı x eksik öğrenme, en fazla 2'si aynı dersten ----
+function bugunAdaylar(ex,adet=3){
+  const aday=[];
+  for(const d in DATA[ex])for(const t of DATA[ex][d]){
+    const r=rec(id(ex,d,t));
+    if((r.m||0)>=85)continue;                                  // iyi bilinen konuyu önerme
+    aday.push({d,t,m:r.m||0,s:+r.s||0,
+      skor:agirlik(ex,d)*(100-(r.m||0))*(r.s?1:1.35)});        // hiç başlanmamışa hafif öncelik
+  }
+  aday.sort((a,b)=>b.skor-a.skor);
+  const sec=[],kac={};                                         // karışık ders (interleaving): ders başına en fazla 2
+  for(const a of aday){
+    if((kac[a.d]||0)>=2)continue;
+    sec.push(a);kac[a.d]=(kac[a.d]||0)+1;
+    if(sec.length>=adet)break;
+  }
+  return sec;
+}
+function renderBugun(){
+  const wrap=document.getElementById("bugunListe");if(!wrap)return;
+  const sec=bugunAdaylar(exam);
+  if(!sec.length){wrap.innerHTML=`<div class="bugun-bos">${exam} konularının hepsi iyi durumda görünüyor 👏</div>`;return;}
+  wrap.innerHTML=sec.map(a=>{
+    const [ic,col]=meta(a.d), at=s=>String(s).replace(/"/g,"&quot;");
+    return `<button class="bg-item" style="--sc:${col}" data-ders="${at(a.d)}" data-konu="${at(a.t)}">
+      <span class="bg-ico" aria-hidden="true">${ic}</span>
+      <span class="bg-txt"><span class="bg-konu">${a.t}</span><span class="bg-ders">${a.d}</span></span>
+      <span class="bg-rozet">${a.s?a.m+"% öğrenme":"hiç başlanmadı"}</span>
+    </button>`;}).join("");
+}
+// runnable check: aynı dersten en fazla 2 öneri çıkmalı
+console.assert(Object.values(bugunAdaylar("TYT").reduce((o,a)=>(o[a.d]=(o[a.d]||0)+1,o),{})).every(n=>n<=2),
+  "bugün önerisi tek derse yığıldı");
 function mColor(m){return m>=75?'var(--good)':m>=40?'var(--warn)':m>0?'var(--bad)':'var(--dim)'}
 
 function dash(){
@@ -625,6 +737,7 @@ document.getElementById("list").addEventListener("click",e=>{
   else if(a==="s-")r.s=Math.max(0,(+r.s||0)-1);
   else if(a==="t+")r.t++;
   else if(a==="t-")r.t=Math.max(0,r.t-1);
+  r.last=Date.now();                                 // tekrar rozetinin dayandığı son dokunuş
   save();if(typeof logAktivite==="function")logAktivite();refreshRow(tr,r);dashAndBar(tr);
   if(a==="s"){const c=tr.querySelector(".chk");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");}
   if(a==="t+"){const n=tr.querySelector(".n");n.classList.remove("bump");void n.offsetWidth;n.classList.add("bump");}
@@ -632,12 +745,13 @@ document.getElementById("list").addEventListener("click",e=>{
 document.getElementById("list").addEventListener("input",e=>{
   if(e.target.dataset.a!=="m")return;
   const tr=e.target.closest("tr.topic");const r=rec(tr.dataset.k);
-  r.m=+e.target.value;save();if(typeof logAktivite==="function")logAktivite();
+  r.m=+e.target.value;r.last=Date.now();save();if(typeof logAktivite==="function")logAktivite();
   const v=tr.querySelector(".mval");v.textContent=r.m+"%";v.style.color=mColor(r.m);
   dashAndBar(tr);
 });
 function refreshRow(tr,r){
-  const chk=tr.querySelector(".chk"),ad=tr.querySelector(".tname").textContent;
+  const chk=tr.querySelector(".chk"),ad=tr.querySelector(".tn").textContent;
+  tr.querySelector(".tname").innerHTML=`<span class="tn">${ad}</span>`+(tazeleme(r)?'<span class="tzl">⏳ tazelemeye hazır</span>':'');
   chk.classList.toggle("on",r.s>0);chk.textContent=r.s||"";
   chk.setAttribute("aria-label",`${ad} — ${r.s||0} kez çalıştım, artırmak için tıkla`);
   const rep=tr.querySelector(".rep");rep.classList.toggle("has",r.s>0);
@@ -837,6 +951,79 @@ function renderCompare(){
     </div>
     <div class="cc-diff" style="color:${diff===0?'var(--dim)':diff>0?'var(--accent)':'var(--accent2)'}">${diffTxt}</div>`;
 }
+// ---- Kalibrasyon: öz-değerlendirme (öğrenme %) ile deneme sonuçlarını karşılaştırır ----
+// Deneme dersi -> hangi konu derslerini kapsıyor
+const KAL_ESLEME={
+ TYT:{"Türkçe":["Türkçe"],"Temel Matematik":["Matematik","Geometri"],
+      "Fen Bilimleri":["Fizik","Kimya","Biyoloji"],"Sosyal Bilimler":["Tarih","Coğrafya","Felsefe","Din Kültürü"]},
+ AYT:{"Matematik":["Matematik","Geometri (AYT)"],"Fizik":["Fizik"],"Kimya":["Kimya"],"Biyoloji":["Biyoloji"],
+      "Edebiyat":["Edebiyat"],"Tarih-1":["Tarih"],"Tarih-2":["Tarih"],"Coğrafya-1":["Coğrafya"],"Coğrafya-2":["Coğrafya"],
+      "Felsefe Grubu":["Felsefe Grubu"],"Din Kültürü":["Din Kültürü"]}
+};
+const KAL_ESIK=25;      // bu puandan küçük farklar normal sayılır, not gösterilmez
+const KAL_MIN_DENEME=2;  // en az bu kadar deneme birikmeden hiç gösterme
+const KAL_MIN_KAPSAM=60; // dersin konularının bu yüzdesi değerlendirilmeden yorum yapma
+
+function kalibrasyonVerisi(){
+  const out=[];
+  ["TYT","AYT"].forEach(ex=>{
+    const maks=ex==="AYT"?AYT_DERSLER:TYT_DERSLER;
+    for(const dersAd in (KAL_ESLEME[ex]||{})){
+      // gerçek: o dersi içeren denemelerde net/maks oranı
+      let netTop=0,maksTop=0,adet=0;
+      denemeler.forEach(dn=>{
+        if(dn.tur!==ex)return;
+        const x=dn.dersler&&dn.dersler[dersAd];
+        if(!x||(x.d+x.y)===0)return;                 // girilmemiş dersi sayma
+        netTop+=Math.max(0,x.net);maksTop+=maks[dersAd]||0;adet++;
+      });
+      if(adet<KAL_MIN_DENEME||!maksTop)continue;
+      // öz-değerlendirme: SADECE dokunulmuş konuların ortalaması.
+      // (Hiç işaretlenmemiş konuyu 0 saymak, uygulamayı yeni kullananda yanlış sinyal üretiyordu.)
+      let mTop=0,mAdet=0,toplamKonu=0;
+      KAL_ESLEME[ex][dersAd].forEach(kd=>{
+        if(!DATA[ex]||!DATA[ex][kd])return;
+        DATA[ex][kd].forEach(t=>{
+          const r=rec(id(ex,kd,t));toplamKonu++;
+          if(r.s||r.m){mTop+=r.m||0;mAdet++;}
+        });
+      });
+      if(!mAdet)continue;
+      const oz=Math.round(mTop/mAdet), ger=Math.round(netTop/maksTop*100);
+      const kapsam=Math.round(mAdet/toplamKonu*100);
+      out.push({ex,ders:dersAd,oz,ger,fark:oz-ger,adet,kapsam,mAdet,toplamKonu});
+    }
+  });
+  return out.sort((a,b)=>Math.abs(b.fark)-Math.abs(a.fark));
+}
+function renderKalibrasyon(){
+  const wrap=document.getElementById("kalibrasyon");if(!wrap)return;
+  const veri=kalibrasyonVerisi();
+  if(!veri.length){
+    wrap.innerHTML=`<div class="bugun-bos">Bu karşılaştırma için en az ${KAL_MIN_DENEME} deneme gerekiyor. Deneme ekledikçe burada kendi değerlendirmenle sonuçların yan yana görünecek.</div>`;
+    return;
+  }
+  wrap.innerHTML=`<div class="kal-lgnd"><span><i style="background:color-mix(in srgb,var(--accent) 55%,transparent)"></i>Kendi değerlendirmen</span><span><i style="background:var(--good)"></i>Deneme sonuçların</span></div>`
+    +veri.map(v=>{
+      // Kapsam düşükken (dersin çoğu konusu hiç değerlendirilmemişken) yorum yapma — yanıltıcı olur.
+      let not="";
+      if(v.kapsam<KAL_MIN_KAPSAM)
+        not=`<div class="kal-not">Bu derste ${v.toplamKonu} konudan ${v.mAdet}'ini değerlendirmişsin. Daha fazlasını işaretledikçe karşılaştırma anlamlı hale gelecek.</div>`;
+      else if(v.fark>=KAL_ESIK)
+        not=`<div class="kal-not">${v.ders} için kendine verdiğin puan, son denemelerindekinden biraz yüksek görünüyor. İstersen bir göz at.</div>`;
+      else if(v.fark<=-KAL_ESIK)
+        not=`<div class="kal-not">Denemelerine göre ${v.ders}'te kendine hak ettiğinden az puan vermişsin — gayet iyi gidiyorsun.</div>`;
+      return `<div class="kal-row">
+        <span class="kal-ders">${v.ders} <small style="color:var(--dim);font-weight:400">${v.ex}</small></span>
+        <span class="kal-say">sen ${v.oz}% · deneme ${v.ger}% <small>(${v.adet} deneme)</small></span>
+        <span class="kal-bar"><i class="kb-oz" style="width:${v.oz}%"></i><i class="kb-ger" style="width:${v.ger}%"></i></span>
+        ${not}
+      </div>`;
+    }).join("");
+}
+// runnable check: fark hesabı yönü (öz > gerçek pozitif olmalı)
+console.assert(((o,g)=>o-g)(80,50)===30,"kalibrasyon fark yönü bozuk");
+
 function renderStats(){
   const o=overallAgg();
   // hiç veri yoksa: sessiz sıfır grafikler yerine tek yönlendirici mesaj
@@ -845,6 +1032,7 @@ function renderStats(){
   document.querySelectorAll("#view-stats .card-block:not(.stats-empty)").forEach(c=>c.hidden=bos);
   if(bos)return;
   renderGenel(o);
+  renderKalibrasyon();
   document.getElementById("barTYT").innerHTML=barsSVG("TYT");
   document.getElementById("barAYT").innerHTML=barsSVG("AYT");
   document.getElementById("heatmapWrap").innerHTML=heatmapSVG();
@@ -873,6 +1061,12 @@ function dnRenderDersGrid(){
         Y <input type="number" min="0" max="${maks}" value="0" data-a="y" aria-label="${ad} yanlış sayısı">
         <span class="dn-net" data-a="net">0</span>
       </div>
+      <div class="dn-neden" hidden>
+        <span class="nlbl">Neden kaybettin? (isteğe bağlı)</span>
+        <button type="button" class="nd-chip" data-n="Bilgi eksik">Bilgi eksik</button>
+        <button type="button" class="nd-chip" data-n="Dikkat">Dikkat</button>
+        <button type="button" class="nd-chip" data-n="Süre">Süre</button>
+      </div>
     </div>`).join("");
   dnUpdateTotal();
 }
@@ -883,6 +1077,8 @@ function dnUpdateTotal(){
     const y=+el.querySelector('[data-a="y"]').value||0;
     const net=dnNet(d,y);
     el.querySelector('[data-a="net"]').textContent=net;
+    const nd=el.querySelector(".dn-neden");
+    if(nd){nd.hidden=y<=0;if(y<=0)nd.querySelectorAll(".nd-chip").forEach(c=>c.classList.remove("on"));}
     total+=net;
   });
   total=Math.round(total*100)/100;
@@ -902,7 +1098,10 @@ function dnRenderList(){
       <span class="dn-badge ${dn.tur.toLowerCase()}">${dn.tur}</span>
       <div style="flex:1;min-width:0">
         <div style="font-weight:700;font-size:var(--fs-base);line-height:var(--lh-ui)">${dn.ad}</div>
-        <div style="font-size:var(--fs-xs);line-height:var(--lh-help);color:var(--dim)">${dn.tarih}</div>
+        <div style="font-size:var(--fs-xs);line-height:var(--lh-help);color:var(--dim);display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <span>${dn.tarih}</span>
+          ${[...new Set(Object.values(dn.dersler||{}).map(x=>x&&x.neden).filter(Boolean))].map(n=>`<span class="dn-tag">${n}</span>`).join("")}
+        </div>
       </div>
       <span class="dn-net-badge${rekor?' rekor':''}"${rekor?' title="'+dn.tur+' en yüksek netin"':''}>${rekor?'★ ':''}${dn.toplamNet} net</span>
       <button class="dn-del" data-id="${dn.id}" aria-label="${String(dn.ad).replace(/"/g,'&quot;')} denemesini sil">Sil</button>
@@ -941,6 +1140,13 @@ document.getElementById("dn-dersgrid").addEventListener("input",e=>{
   if(!e.target.matches('[data-a="d"],[data-a="y"]'))return;
   dnUpdateTotal();
 });
+// neden etiketi: tek seçim, tekrar basınca kalkar
+document.getElementById("dn-dersgrid").addEventListener("click",e=>{
+  const c=e.target.closest(".nd-chip");if(!c)return;
+  const secili=c.classList.contains("on");
+  c.closest(".dn-neden").querySelectorAll(".nd-chip").forEach(x=>x.classList.remove("on"));
+  if(!secili)c.classList.add("on");
+});
 document.getElementById("dn-form").addEventListener("submit",e=>{
   e.preventDefault();
   const ad=document.getElementById("dn-ad").value.trim()||"İsimsiz Deneme";
@@ -950,7 +1156,8 @@ document.getElementById("dn-form").addEventListener("submit",e=>{
   document.querySelectorAll("#dn-dersgrid .dn-ders").forEach(el=>{
     const d=+el.querySelector('[data-a="d"]').value||0;
     const y=+el.querySelector('[data-a="y"]').value||0;
-    dersObj[el.dataset.ders]={d,y,net:dnNet(d,y)};
+    const neden=el.querySelector(".nd-chip.on");
+    dersObj[el.dataset.ders]={d,y,net:dnNet(d,y),...(neden?{neden:neden.dataset.n}:{})};
   });
   const toplamNet=Math.round(Object.values(dersObj).reduce((s,x)=>s+x.net,0)*100)/100;
   denemeler.push({id:Date.now()+"",ad,tarih,tur,dersler:dersObj,toplamNet});
@@ -1141,6 +1348,19 @@ function showView(v){
   window.scrollTo(0,0);
 }
 document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+
+// ---- Bugün kartı: açık/kapalı tercihi hatırlanır, öneriye tıklayınca konuya gider ----
+const bugunKart=document.getElementById("bugunKart");
+bugunKart.open=localStorage.getItem("yks_bugun_acik")!=="0";
+bugunKart.addEventListener("toggle",()=>localStorage.setItem("yks_bugun_acik",bugunKart.open?"1":"0"));
+document.getElementById("bugunListe").addEventListener("click",e=>{
+  const b=e.target.closest(".bg-item");if(!b)return;
+  const tr=document.querySelector(`tr.topic[data-k="${CSS.escape(id(exam,b.dataset.ders,b.dataset.konu))}"]`);
+  if(!tr)return;
+  tr.closest(".subj").open=true;
+  tr.scrollIntoView({behavior:"smooth",block:"center"});
+  tr.classList.remove("konu-vurgu");void tr.offsetWidth;tr.classList.add("konu-vurgu");
+});
 
 // çevrimdışı destek — file:// ile açıldığında sessizce atlanır
 if("serviceWorker" in navigator)
