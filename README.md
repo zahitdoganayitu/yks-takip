@@ -9,7 +9,7 @@ Cloudflare Workers üzerinden yayınlanır: https://yks-takip.doganaym22.workers
 - **Bugün** — koçun haftalık programı (hedef/yapılan ilerlemesi, ▶ ile sayacı başlatma), çalışma sayacı (sayfa kapansa da akar), çalışma kaydı (ders, konu, süre, soru), gün gün geçmiş.
 - **Konular** — TYT/AYT konu listesi. Her konu için: kaç kez çalıştın, kaç test çözdün, konuyu ne kadar öğrendiğini düşünüyorsun (0–100%).
 - **İstatistik** — genel ilerleme halkası, ders bazlı öğrenme grafiği, 12 haftalık çalışma bahçesi (çalışılan her güne süreye göre büyüyen bir ağaç), bronz/gümüş/altın kademeli rozetler, TYT/AYT karşılaştırması.
-- **Kullanım kılavuzu** — başlıktaki ❓ düğmesi; ilk girişte kendiliğinden bir kez açılır.
+- **Kullanım kılavuzu** — başlıktaki "Nasıl kullanılır" düğmesi; ilk girişte kendiliğinden bir kez açılır.
 - **Tema** — Ayarlar'dan Gece Mavisi (sistemin açık/koyu ayarına uyar), Orman ya da Gün Batımı; seçim cihaza özel.
 - **Denemeler** — deneme sınavı ekle, ders bazlı doğru/yanlış gir, net otomatik hesaplanır (D − Y/4), net trend grafiği.
 - **Ayarlar** — hedef üniversite/bölüm, konu ekleme/silme, JSON yedek alma ve geri yükleme.

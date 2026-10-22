@@ -1,7 +1,7 @@
 // Offline destek: uygulama kabuğunu önbelleğe alır.
 // HTML için network-first (internet varsa her zaman güncel sürüm gelir),
 // varlıklar için cache-first (hızlı açılış). Kod değişince CACHE sürümünü artır.
-const CACHE = "yks-v8";
+const CACHE = "yks-v9";
 const SHELL = ["./", "index.html", "manifest.json", "icon.svg", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {

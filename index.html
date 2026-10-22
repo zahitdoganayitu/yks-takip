@@ -1,6 +1,6 @@
 <html lang="tr">
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>YKS Çalışma Takip</title>
 <!-- telefonda "ana ekrana ekle" ile uygulama gibi açılsın -->
 <link rel="manifest" href="manifest.json">
@@ -85,12 +85,18 @@ svg text{font-family:var(--font-sans);font-variant-numeric:tabular-nums lining-n
 
 header{position:sticky;top:0;z-index:5;backdrop-filter:blur(12px);
   background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 88%,transparent),color-mix(in srgb,var(--bg) 60%,transparent));
-  border-bottom:1px solid var(--line);padding:var(--sp-4) 18px}
+  border-bottom:1px solid var(--line);
+  padding:calc(var(--sp-4) + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) var(--sp-4) calc(18px + env(safe-area-inset-left))}
+html{touch-action:manipulation}
+@media(pointer:coarse){input,select,textarea{font-size:max(16px,1em)!important}}
 .wrap{max-width:920px;margin:0 auto;padding:0 var(--sp-4)}
 h1{font-size:var(--fs-xl);line-height:var(--lh-heading);margin:0;font-weight:var(--fw-bold);letter-spacing:var(--tracking-tight);color:var(--txt);display:flex;align-items:center;gap:var(--sp-2)}
 h1 span{font-size:24px}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2)}
-.kv-ac{flex:none}
+.kv-ac{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:var(--hit);padding:6px 14px 6px 8px;border-radius:var(--r-pill);
+  font-weight:var(--fw-bold);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));background:color-mix(in srgb,var(--accent) 14%,var(--surf-2))}
+.kv-ac b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:17px;line-height:1}
+@media(max-width:480px){header h1{font-size:var(--fs-md);white-space:nowrap}header h1 span{font-size:20px}.kv-ac{font-size:var(--fs-sm)}}
 .kv{max-height:calc(100dvh - 40px);overflow:auto}
 .kv details{border-top:1px solid var(--line);padding:var(--sp-2) 0}
 .kv summary{cursor:pointer;font-weight:var(--fw-bold);min-height:var(--hit);display:flex;align-items:center}
@@ -521,8 +527,6 @@ button.pm:hover{border-color:var(--sc)}
 .rz-kademe i{width:7px;height:7px;border-radius:50%;background:var(--surf-3);border:1px solid var(--line-hi)}
 .rz-kademe i.on{background:var(--rc);border-color:var(--rc)}
 @media(max-width:640px){.rz-grid{grid-template-columns:1fr}}
-@media(max-width:480px){.kv-yazi{display:none}}
-
 /* tema seçici */
 .tema-sec{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
 .tema-sec label{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:var(--sp-3) var(--sp-2);cursor:pointer;
@@ -540,12 +544,12 @@ button.pm:hover{border-color:var(--sc)}
 <header>
   <div class="wrap">
     <h1><span>📚</span> YKS Çalışma Takip</h1>
-    <button type="button" class="ayr-btn kv-ac" id="kv-ac" aria-haspopup="dialog" aria-label="Nasıl kullanılır">❓<span class="kv-yazi"> Nasıl kullanılır</span></button>
+    <button type="button" class="ayr-btn kv-ac" id="kv-ac" aria-haspopup="dialog"><b aria-hidden="true">?</b>Nasıl kullanılır</button>
   </div>
 </header>
 <dialog id="kv-dlg" class="dlg kv" aria-labelledby="kv-baslik">
   <h3 id="kv-baslik">📖 Kullanım kılavuzu</h3>
-  <p class="kv-alt">Bir başlığa dokun, açılsın. Bu pencereye üstteki ❓ düğmesinden her zaman dönebilirsin.</p>
+  <p class="kv-alt">Bir başlığa dokun, açılsın. Bu pencereye üstteki <b>Nasıl kullanılır</b> düğmesinden her zaman dönebilirsin.</p>
   <details open>
     <summary>🚪 Başlarken</summary>
     <ol>
@@ -2209,6 +2213,9 @@ $("tema-sec").addEventListener("change",e=>{localStorage.setItem("yks_tema",e.ta
 temaUygula(localStorage.getItem("yks_tema")||"");
 
 $("kv-ac").onclick=()=>$("kv-dlg").showModal();
+// iOS Safari viewport'taki user-scalable=no'yu yok sayar; iki parmak hareketini burada keseriz
+["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+document.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault();},{passive:false});
 if(oturum&&!localStorage.getItem("yks_kilavuz")){localStorage.setItem("yks_kilavuz","1");$("kv-dlg").showModal();}
 
 if(oturum){
