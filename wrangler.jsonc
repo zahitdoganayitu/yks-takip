@@ -1,0 +1,7 @@
+{
+  "name": "yks-takip",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-19",
+  "assets": { "directory": ".", "binding": "ASSETS" },
+  "kv_namespaces": [{ "binding": "YKS", "id": "3a5afbf3b6ed400794bc293196fbbd97" }]
+}

@@ -1,7 +1,7 @@
 // Offline destek: uygulama kabuğunu önbelleğe alır.
 // HTML için network-first (internet varsa her zaman güncel sürüm gelir),
 // varlıklar için cache-first (hızlı açılış). Kod değişince CACHE sürümünü artır.
-const CACHE = "yks-v3";
+const CACHE = "yks-v4";
 const SHELL = ["./", "index.html", "manifest.json", "icon.svg", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
@@ -18,7 +18,8 @@ self.addEventListener("activate", e => {
 
 self.addEventListener("fetch", e => {
   const req = e.request;
-  if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
+  const url = new URL(req.url);
+  if (req.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/api/")) return;
 
   // sayfa isteği: önce ağ, olmazsa önbellek (çevrimdışıyken uygulama yine açılır)
   if (req.mode === "navigate") {
