@@ -89,6 +89,15 @@ header{position:sticky;top:0;z-index:5;backdrop-filter:blur(12px);
 .wrap{max-width:920px;margin:0 auto;padding:0 var(--sp-4)}
 h1{font-size:var(--fs-xl);line-height:var(--lh-heading);margin:0;font-weight:var(--fw-bold);letter-spacing:var(--tracking-tight);color:var(--txt);display:flex;align-items:center;gap:var(--sp-2)}
 h1 span{font-size:24px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-2)}
+.kv-ac{flex:none}
+.kv{max-height:calc(100dvh - 40px);overflow:auto}
+.kv details{border-top:1px solid var(--line);padding:var(--sp-2) 0}
+.kv summary{cursor:pointer;font-weight:var(--fw-bold);min-height:var(--hit);display:flex;align-items:center}
+.kv ol,.kv ul{margin:0 0 var(--sp-2);padding-left:1.3em;font-size:var(--fs-sm);line-height:var(--lh-help);color:var(--dim)}
+.kv li{margin:4px 0}
+.kv li b{color:var(--txt)}
+.kv-alt{font-size:var(--fs-sm);color:var(--dim);margin:-8px 0 var(--sp-3)}
 
 /* üst navigasyon (masaüstü) / alt tab bar (mobil) */
 .navwrap{max-width:920px;margin:0 auto;padding:var(--sp-3) var(--sp-4) 0}
@@ -492,24 +501,27 @@ button.pm:hover{border-color:var(--sc)}
 /* rozetler */
 .rz-ust{margin:-4px 0 var(--sp-3);font-size:var(--fs-sm);color:var(--dim)}
 .rz-ust b{color:var(--txt);font-size:var(--fs-md)}
-.rz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--sp-3)}
-.rz{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:var(--sp-4) var(--sp-3) var(--sp-3);
+.rz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--sp-2)}
+.rz{position:relative;display:grid;grid-template-columns:auto 1fr;column-gap:10px;row-gap:1px;align-items:center;padding:8px 10px;
   border-radius:var(--r-md);border:1px solid var(--line);background:var(--surf-2)}
-.rz-ik{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:28px;margin-bottom:4px;
+.rz>:not(.rz-ik){grid-column:2;min-width:0}
+.rz-ik{grid-row:1/span 3;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;
   background:var(--surf-3);border:3px solid var(--rc);filter:grayscale(1);opacity:.45}
 .rz.ok .rz-ik{filter:none;opacity:1;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--rc) 45%,var(--surf-2)),var(--surf-3));
   box-shadow:0 0 0 4px color-mix(in srgb,var(--rc) 18%,transparent),0 6px 18px color-mix(in srgb,var(--rc) 30%,transparent)}
 .rz.ok{border-color:color-mix(in srgb,var(--rc) 45%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 10%,var(--surf-2)),var(--surf-2))}
-.rz-ad{font-size:var(--fs-sm);line-height:var(--lh-ui)}
+.rz-ad{font-size:var(--fs-xs,12px);line-height:var(--lh-ui)}
 .rz-ad small{color:var(--rc);font-weight:var(--fw-bold)}
 .rz-ac{font-size:var(--fs-2xs);color:var(--dim);line-height:var(--lh-help)}
-.rz-bar{width:100%;height:6px;border-radius:var(--r-pill);background:var(--surf-3);overflow:hidden;margin-top:4px}
+.rz-alt{display:flex;align-items:center;gap:6px;margin-top:2px}
+.rz-bar{flex:1;height:5px;border-radius:var(--r-pill);background:var(--surf-3);overflow:hidden}
 .rz-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-b))}
 .rz-say{font-size:var(--fs-2xs);color:var(--dim);font-variant-numeric:tabular-nums}
-.rz-kademe{display:flex;gap:4px;margin-top:2px}
-.rz-kademe i{width:8px;height:8px;border-radius:50%;background:var(--surf-3);border:1px solid var(--line-hi)}
+.rz-kademe{display:flex;gap:3px;margin-left:auto}
+.rz-kademe i{width:7px;height:7px;border-radius:50%;background:var(--surf-3);border:1px solid var(--line-hi)}
 .rz-kademe i.on{background:var(--rc);border-color:var(--rc)}
-@media(max-width:640px){.rz-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.rz-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.kv-yazi{display:none}}
 
 /* tema seçici */
 .tema-sec{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
@@ -528,8 +540,83 @@ button.pm:hover{border-color:var(--sc)}
 <header>
   <div class="wrap">
     <h1><span>📚</span> YKS Çalışma Takip</h1>
+    <button type="button" class="ayr-btn kv-ac" id="kv-ac" aria-haspopup="dialog" aria-label="Nasıl kullanılır">❓<span class="kv-yazi"> Nasıl kullanılır</span></button>
   </div>
 </header>
+<dialog id="kv-dlg" class="dlg kv" aria-labelledby="kv-baslik">
+  <h3 id="kv-baslik">📖 Kullanım kılavuzu</h3>
+  <p class="kv-alt">Bir başlığa dokun, açılsın. Bu pencereye üstteki ❓ düğmesinden her zaman dönebilirsin.</p>
+  <details open>
+    <summary>🚪 Başlarken</summary>
+    <ol>
+      <li><b>Hesap oluştur</b>: giriş ekranında "Hesap oluştur"a dokun, kullanıcı adı ve şifre seç. Öğrenciysen <b>🎒 Öğrenciyim</b>, koçsan <b>🧭 Koçum</b>.</li>
+      <li>Kullanıcı adında Türkçe harf olmaz: "nazlı" yerine <b>nazli</b> yaz. Küçük harf, rakam, nokta ve alt çizgi kullanılabilir.</li>
+      <li>Telefonda, bilgisayarda, hangi tarayıcıda olursa olsun <b>aynı hesapla giriş yap</b>. Verilerin hesapta durur, her yerde aynı görünür.</li>
+      <li>Ana ekrana eklemek için: iPhone'da Safari'de paylaş düğmesi, sonra <b>Ana Ekrana Ekle</b>. Android'de Chrome menüsü, sonra <b>Ana ekrana ekle</b>.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>⏱️ Çalışma kaydetmek (öğrenci)</summary>
+    <ol>
+      <li><b>Bugün</b> sekmesinde ne çalışacağını seç, <b>Başlat</b>'a dokun. Uygulamayı kapatsan da sayaç saymaya devam eder.</li>
+      <li>Bitince <b>Bitir ve kaydet</b>: süre hazır gelir, konuyu ve çözdüğün soru sayısını yazıp kaydet.</li>
+      <li>Sayaç kullanmadıysan <b>＋ Elle ekle</b> ile süreyi ve soruyu kendin gir. Geçmiş bir günü de seçebilirsin.</li>
+      <li>Programda olmayan, kendi eklediğin çalışmalar da kaydedilir; hepsi koçuna gider.</li>
+      <li>Yanlış girdiysen <b>Çalışma geçmişi</b>nde o satırdaki <b>Sil</b>'e dokun.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>📋 Koçunun programı (öğrenci)</summary>
+    <ol>
+      <li>Koçunun yazdığı haftalık program <b>Bugün</b> sekmesinin en üstünde. Oklarla önceki ve sonraki haftaya geçebilirsin.</li>
+      <li>Bir maddenin yanındaki <b>▶</b> o dersin sayacını başlatır. Kaydettiğin çalışma o maddenin çubuğunu doldurur.</li>
+      <li>Hedef süreye ya da soruya ulaşınca madde ✓ olur.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>🔗 Koçla bağlanmak</summary>
+    <ol>
+      <li>Öğrenci <b>Ayarlar → 👤 Hesap</b> kısmına koçunun kullanıcı adını yazıp bağlar.</li>
+      <li>Bağlanınca koç tüm çalışmaları, konuları ve denemeleri görür. Koç değiştiremez, sadece program yazar.</li>
+      <li>Bağlantıyı aynı yerden <b>Koçu kaldır</b> ile kesebilirsin.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>🧭 Koç olarak kullanmak</summary>
+    <ol>
+      <li>Öğrencin seni bağlayınca üstteki banttan onu seçersin. Birden fazla öğrencin varsa aralarında geçiş yaparsın.</li>
+      <li><b>Bugün</b> sekmesinde her günün altındaki <b>＋ Ekle</b> ile program maddesi ekle: ders, ne yapacağı, hedef süre ve soru.</li>
+      <li>Bir maddeye dokunup düzenleyebilir ya da silebilirsin. <b>Geçen haftanın programını kopyala</b> aynı programı bu haftaya taşır.</li>
+      <li>Öğrencinin çalışmalarını <b>Çalışma geçmişi</b>nde, gelişimini <b>İstatistik</b>'te görürsün.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>📖 Konular, 📝 Denemeler</summary>
+    <ol>
+      <li><b>Konular</b>'da çalıştığın konuyu işaretle, ne kadar öğrendiğini yüzdeyle gir, test çözdüysen onu da işaretle.</li>
+      <li><b>Denemeler</b>'de deneme adını, tarihini ve netlerini gir. Net grafiğin orada oluşur.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>🌳 Bahçe ve 🏅 rozetler</summary>
+    <ol>
+      <li><b>İstatistik</b>'teki bahçede çalıştığın her güne bir ağaç dikilir. Ne kadar uzun çalışırsan o kadar büyür: 🌱 başladın, 🌿 30 dk, 🌳 1 sa, 🌲 2 sa, 🌸 4 sa+.</li>
+      <li>Üst üste çalıştığın günler <b>seri</b>ni büyütür. Bir gün boş kalırsa seri sıfırlanır.</li>
+      <li>Rozetler İstatistik'in en altında. Çoğu bronz, gümüş ve altın olarak üç kademeli; altındaki çubuk bir sonrakine ne kadar kaldığını gösterir.</li>
+    </ol>
+  </details>
+  <details>
+    <summary>🛟 Bir şey ters giderse</summary>
+    <ul>
+      <li><b>Kayıtlar koçta görünmüyor</b>: internetin açık mı, ikiniz de doğru hesapta mısınız bak. Uygulamayı kapatıp aç; senkron birkaç saniyede olur.</li>
+      <li><b>Eski görünüm geliyor</b>: uygulamayı tamamen kapatıp yeniden aç.</li>
+      <li><b>İnternet yokken</b> çalışmaya devam edebilirsin; internet gelince kayıtlar kendiliğinden gönderilir.</li>
+      <li><b>Şifreni unutma</b>: şifre sıfırlama yok, gerekirse yeni hesap açılır.</li>
+      <li>Tema değiştirmek için <b>Ayarlar → 🎨 Tema</b>.</li>
+    </ul>
+  </details>
+  <div class="dlg-btns"><button type="button" class="ayr-btn" data-kapat>Anladım</button></div>
+</dialog>
 <section id="giris" class="wrap">
   <div class="setcard">
     <h3 id="g-baslik">Giriş yap</h3>
@@ -664,10 +751,6 @@ button.pm:hover{border-color:var(--sc)}
       <p class="empty-sub">Çalışma sekmesinden bir konu işaretle, öğrenmeni gir — grafikler burada canlansın.</p>
     </div>
     <div class="card-block">
-      <h2>Rozetlerin</h2>
-      <div id="rozetWrap"></div>
-    </div>
-    <div class="card-block">
       <h2>Genel İlerleme</h2>
       <div class="gi" id="giWrap"></div>
     </div>
@@ -694,6 +777,10 @@ button.pm:hover{border-color:var(--sc)}
     <div class="card-block">
       <h2>TYT vs AYT</h2>
       <div id="compareCard"></div>
+    </div>
+    <div class="card-block">
+      <h2>Rozetlerin</h2>
+      <div id="rozetWrap"></div>
     </div>
   </section>
 
@@ -1953,8 +2040,8 @@ function rozetHTML(){
       <span class="rz-ik" aria-hidden="true">${r.ik}</span>
       <b class="rz-ad">${r.ad}${!tek&&r.sev?` <small>${KADEME[r.sev]}</small>`:""}</b>
       <span class="rz-ac">${tam?"✓ "+r.ac(r.esik[r.esik.length-1]):r.ac(hedef)}</span>
-      ${tam||tek?"":`<span class="rz-bar"><i style="width:${Math.round(Math.min(1,r.v/hedef)*100)}%"></i></span><span class="rz-say">${Math.min(r.v,hedef)} / ${hedef}</span>`}
-      ${tek?"":`<span class="rz-kademe" aria-label="${r.sev}/3 kademe">${r.esik.map((_,i)=>`<i class="${i<r.sev?"on":""}"></i>`).join("")}</span>`}
+      ${tek?"":`<span class="rz-alt">${tam?"":`<span class="rz-bar"><i style="width:${Math.round(Math.min(1,r.v/hedef)*100)}%"></i></span><span class="rz-say">${Math.min(r.v,hedef)} / ${hedef}</span>`}
+      <span class="rz-kademe" aria-label="${r.sev}/3 kademe">${r.esik.map((_,i)=>`<i class="${i<r.sev?"on":""}"></i>`).join("")}</span></span>`}
     </div>`;}).join("")+"</div>";
 }
 function rozetKontrol(){
@@ -2120,6 +2207,9 @@ function temaUygula(t){
 }
 $("tema-sec").addEventListener("change",e=>{localStorage.setItem("yks_tema",e.target.value);temaUygula(e.target.value);});
 temaUygula(localStorage.getItem("yks_tema")||"");
+
+$("kv-ac").onclick=()=>$("kv-dlg").showModal();
+if(oturum&&!localStorage.getItem("yks_kilavuz")){localStorage.setItem("yks_kilavuz","1");$("kv-dlg").showModal();}
 
 if(oturum){
   konuListesi();renderHesap();kocBantCiz();renderBugunSekme();
