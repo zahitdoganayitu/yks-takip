@@ -25,6 +25,32 @@ const kul = async (env, ad) => AD.test(ad || "") ? env.YKS.get("kul:" + ad, "jso
 const kulYaz = (env, ad, k) => env.YKS.put("kul:" + ad, JSON.stringify(k));
 const profil = (ad, k) => ({ ad, rol: k.rol, koc: k.koc || null, ogrenciler: k.ogrenciler || [] });
 
+// Cihazlardan gelen anlık görüntüyü hesaptakiyle birleştirir: eski bir cihaz başkasının kaydını silemez.
+// Kimlikli listeler (çalışma, deneme) birleşir, silinenler yks_silinen_v1'de tutulur; konu kaydında son dokunulan kazanır.
+// ponytail: hedef/özel konu gibi düz alanlarda son gönderen kazanır.
+const IDLI = ["yks_calisma_v1", "yks_denemeler_v1"];
+function birlestir(s = {}, c = {}) {
+  const out = { ...s, ...c };
+  const sil = [...new Set([...(s.yks_silinen_v1 || []), ...(c.yks_silinen_v1 || [])])];
+  out.yks_silinen_v1 = sil;
+  for (const k of IDLI) {
+    const m = new Map();
+    for (const x of [...(s[k] || []), ...(c[k] || [])]) if (x && x.id) m.set(x.id, x);
+    out[k] = [...m.values()].filter(x => !sil.includes(x.id));
+  }
+  const t = { ...(s.yks_takip_v1 || {}) };
+  for (const [k, v] of Object.entries(c.yks_takip_v1 || {})) if (!t[k] || (v.last || 0) >= (t[k].last || 0)) t[k] = v;
+  out.yks_takip_v1 = t;
+  const a = { ...(s.yks_aktivite_v1 || {}) };
+  for (const [g, n] of Object.entries(c.yks_aktivite_v1 || {})) a[g] = Math.max(a[g] || 0, n);
+  out.yks_aktivite_v1 = a;
+  return out;
+}
+console.assert((m => m.yks_calisma_v1.length === 1 && m.yks_calisma_v1[0].id === "b" && m.yks_takip_v1.k.m === 50)(
+  birlestir({ yks_calisma_v1: [{ id: "a" }], yks_takip_v1: { k: { m: 50, last: 2 } } },
+            { yks_calisma_v1: [{ id: "b" }], yks_silinen_v1: ["a"], yks_takip_v1: { k: { m: 0 } } })),
+  "birlestir bozuk: eski cihaz kayıt silmemeli, silinen geri gelmemeli");
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -94,9 +120,13 @@ export default {
         if (yol[0] === "veri" ? !kendisi : !koc) return hata("Buna yazma iznin yok.", 403);
         const body = await request.text();
         if (body.length > MAX) return hata("Veri çok büyük.", 413);
-        try { JSON.parse(body); } catch { return hata("JSON değil."); }
-        await env.YKS.put(key, body);
-        return new Response(null, { status: 204 });
+        let gelen;
+        try { gelen = JSON.parse(body); } catch { return hata("JSON değil."); }
+        if (yol[0] === "program") { await env.YKS.put(key, body); return new Response(null, { status: 204 }); }
+        const eski = await env.YKS.get(key, "json");
+        const yeni = { ts: Date.now(), data: birlestir(eski?.data || {}, gelen?.data || {}) };
+        await env.YKS.put(key, JSON.stringify(yeni));
+        return json(yeni);
       }
     }
     return hata("Bulunamadı.", 404);

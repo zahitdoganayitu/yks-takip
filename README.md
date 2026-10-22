@@ -8,7 +8,8 @@ Cloudflare Workers üzerinden yayınlanır: https://yks-takip.doganaym22.workers
 
 - **Bugün** — koçun haftalık programı (hedef/yapılan ilerlemesi, ▶ ile sayacı başlatma), çalışma sayacı (sayfa kapansa da akar), çalışma kaydı (ders, konu, süre, soru), gün gün geçmiş.
 - **Konular** — TYT/AYT konu listesi. Her konu için: kaç kez çalıştın, kaç test çözdün, konuyu ne kadar öğrendiğini düşünüyorsun (0–100%).
-- **İstatistik** — genel ilerleme halkası, ders bazlı öğrenme grafiği, 12 haftalık çalışma ısı haritası, TYT/AYT karşılaştırması.
+- **İstatistik** — genel ilerleme halkası, ders bazlı öğrenme grafiği, 12 haftalık çalışma bahçesi (çalışılan her güne süreye göre büyüyen bir ağaç), bronz/gümüş/altın kademeli rozetler, TYT/AYT karşılaştırması.
+- **Tema** — Ayarlar'dan Gece Mavisi (sistemin açık/koyu ayarına uyar), Orman ya da Gün Batımı; seçim cihaza özel.
 - **Denemeler** — deneme sınavı ekle, ders bazlı doğru/yanlış gir, net otomatik hesaplanır (D − Y/4), net trend grafiği.
 - **Ayarlar** — hedef üniversite/bölüm, konu ekleme/silme, JSON yedek alma ve geri yükleme.
 
@@ -24,7 +25,7 @@ Veriler cihazda tutulur ve hesaba senkron edilir (çevrimdışıyken de çalış
 
 ### Hesap ve koç
 
-Uygulama kullanıcı adı + şifreyle açılır (öğrenci ya da koç hesabı). Öğrencinin verisi hesabına senkron olur; hangi cihaz/tarayıcı olursa olsun giriş yapınca gelir. Öğrenci **Ayarlar → Hesap** kısmına koçunun kullanıcı adını yazar; koç o öğrencinin her şeyini görür ve **Bugün** sekmesinde haftalık program yazar. Sunucu `worker.js`, veri Cloudflare KV'de (`YKS` binding), şifreler PBKDF2 ile saklanır.
+Uygulama kullanıcı adı + şifreyle açılır (öğrenci ya da koç hesabı). Öğrencinin verisi hesabına senkron olur; hangi cihaz/tarayıcı olursa olsun giriş yapınca gelir. Öğrenci **Ayarlar → Hesap** kısmına koçunun kullanıcı adını yazar; koç o öğrencinin her şeyini görür ve **Bugün** sekmesinde haftalık program yazar. Sunucu `worker.js`, veri Cloudflare KV'de (`YKS` binding), şifreler PBKDF2 ile saklanır. Sunucu cihazlardan gelen veriyi birleştirir (çalışma/deneme kayıtları id'ye göre, konu ilerlemesi en yeni kayda göre, silinenler ayrı listede), böylece eski veriyle açılan bir cihaz diğerlerinin kayıtlarını silemez.
 
 ## Teknik
 

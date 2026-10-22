@@ -11,6 +11,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0c14" media="(prefers-color-scheme:dark)">
 <meta name="theme-color" content="#f6f8fd" media="(prefers-color-scheme:light)">
+<script>document.documentElement.dataset.tema=localStorage.getItem("yks_tema")||"";</script>
 <style>
 :root{
   /* renk — koyu (varsayılan) */
@@ -55,6 +56,17 @@
     --e2:0 10px 28px rgba(30,45,90,.12);
   }
 }
+/* elle seçilen temalar (Ayarlar → Tema); varsayılan tema sistemin açık/koyu ayarını izler */
+:root[data-tema="orman"]{color-scheme:dark;
+  --bg:#0b1410; --bg2:#0e1913; --surf-1:#13211a; --surf-2:#1a2c22; --surf-3:#22392c;
+  --line:#243a2e; --line-hi:#356049; --txt:#eef7f1; --dim:#9db8a8;
+  --accent:#34c37a; --accent-b:#17a99b; --warm:#f2b84b; --good:#5fe08f; --warn:#f2c14e; --bad:#ff7a6b;
+  --e1:0 1px 2px rgba(0,0,0,.3),0 1px 1px rgba(0,0,0,.2); --e2:0 10px 28px rgba(0,0,0,.4)}
+:root[data-tema="gunbatimi"]{color-scheme:light;
+  --bg:#fff6ee; --bg2:#fdeee1; --surf-1:#fffcf8; --surf-2:#fbefe3; --surf-3:#f5e1cf;
+  --line:#f0dcc8; --line-hi:#e2bfa0; --txt:#3b2417; --dim:#8a6650;
+  --accent:#e2593a; --accent-b:#cf3c76; --warm:#f59e0b; --good:#1f9d63; --warn:#c98204; --bad:#d64545;
+  --e1:0 1px 2px rgba(120,60,20,.06),0 1px 1px rgba(120,60,20,.05); --e2:0 10px 28px rgba(120,60,20,.14)}
 *{box-sizing:border-box}
 body{margin:0;font-family:var(--font-sans);color:var(--txt);line-height:var(--lh-body);font-size:var(--fs-base);
   background:radial-gradient(1100px 520px at 12% -12%,color-mix(in srgb,var(--accent) 12%,transparent),transparent 60%),var(--bg);
@@ -246,11 +258,6 @@ thead th.c{text-align:center}
 .bar-sub{font-size:var(--fs-2xs);line-height:var(--lh-ui);color:var(--dim);letter-spacing:var(--tracking-label);font-weight:var(--fw-semibold);margin:10px 0 4px}
 .bar-chart svg{display:block;max-width:100%}
 .bar-chart svg text{font-family:inherit}
-.heatmap-wrap svg{display:block;max-width:100%}
-.heatmap-wrap svg text{font-family:inherit}
-.hm-legend{display:flex;align-items:center;gap:4px;font-size:var(--fs-2xs);line-height:var(--lh-help);color:var(--dim);margin-top:6px}
-.hm-legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
-.hm-legend b{font-weight:var(--fw-regular);margin:0 5px}
 .stats-empty{text-align:center;padding:36px 18px}
 .empty-lead{font-size:var(--fs-md);font-weight:var(--fw-bold);margin:0 0 6px}
 .empty-sub{font-size:var(--fs-sm);color:var(--dim);margin:0;max-width:340px;margin-inline:auto;line-height:var(--lh-help)}
@@ -465,6 +472,54 @@ button.pm:hover{border-color:var(--sc)}
   background:linear-gradient(135deg,var(--accent),var(--accent-b));box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 35%,transparent)}
 #pr-kopya{margin-top:var(--sp-3)}
 
+/* çalışma bahçesi */
+.bh-ozet{display:flex;flex-wrap:wrap;gap:6px var(--sp-4);font-size:var(--fs-sm);color:var(--dim);margin-bottom:var(--sp-3)}
+.bh-ozet b{color:var(--txt);font-variant-numeric:tabular-nums}
+.bahce{container-type:inline-size;display:grid;grid-template-rows:repeat(7,auto);grid-auto-flow:column;
+  grid-template-columns:auto;grid-auto-columns:1fr;gap:4px}
+.bh-gun{font-size:var(--fs-2xs);color:var(--dim);display:flex;align-items:center;padding-right:4px}
+.bh{aspect-ratio:1;border-radius:6px;display:grid;place-items:center;overflow:hidden;
+  background:color-mix(in srgb,#9a6b3f 16%,var(--surf-2));border:1px solid color-mix(in srgb,#9a6b3f 18%,transparent)}
+.bh.dolu{background:linear-gradient(180deg,color-mix(in srgb,#63c46a 10%,var(--surf-2)) 55%,color-mix(in srgb,#63c46a 32%,var(--surf-2)));
+  border-color:color-mix(in srgb,#63c46a 35%,transparent)}
+.bh.sonra{background:transparent;border:1px dashed var(--line)}
+.bh.bh-bugun{outline:2px solid var(--accent);outline-offset:1px}
+.bh i{font-style:normal;line-height:1;font-size:min(calc(var(--boy) * 6.6cqi),calc(var(--boy) * 30px));
+  transform-origin:50% 100%;animation:fidan var(--t-slow) var(--ease-bounce) both}
+@keyframes fidan{from{transform:scale(.2) translateY(30%);opacity:0}to{transform:none;opacity:1}}
+.bh-lejant{display:flex;flex-wrap:wrap;gap:4px var(--sp-3);font-size:var(--fs-2xs);color:var(--dim);margin-top:var(--sp-3)}
+
+/* rozetler */
+.rz-ust{margin:-4px 0 var(--sp-3);font-size:var(--fs-sm);color:var(--dim)}
+.rz-ust b{color:var(--txt);font-size:var(--fs-md)}
+.rz-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:var(--sp-3)}
+.rz{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:var(--sp-4) var(--sp-3) var(--sp-3);
+  border-radius:var(--r-md);border:1px solid var(--line);background:var(--surf-2)}
+.rz-ik{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:28px;margin-bottom:4px;
+  background:var(--surf-3);border:3px solid var(--rc);filter:grayscale(1);opacity:.45}
+.rz.ok .rz-ik{filter:none;opacity:1;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--rc) 45%,var(--surf-2)),var(--surf-3));
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--rc) 18%,transparent),0 6px 18px color-mix(in srgb,var(--rc) 30%,transparent)}
+.rz.ok{border-color:color-mix(in srgb,var(--rc) 45%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--rc) 10%,var(--surf-2)),var(--surf-2))}
+.rz-ad{font-size:var(--fs-sm);line-height:var(--lh-ui)}
+.rz-ad small{color:var(--rc);font-weight:var(--fw-bold)}
+.rz-ac{font-size:var(--fs-2xs);color:var(--dim);line-height:var(--lh-help)}
+.rz-bar{width:100%;height:6px;border-radius:var(--r-pill);background:var(--surf-3);overflow:hidden;margin-top:4px}
+.rz-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-b))}
+.rz-say{font-size:var(--fs-2xs);color:var(--dim);font-variant-numeric:tabular-nums}
+.rz-kademe{display:flex;gap:4px;margin-top:2px}
+.rz-kademe i{width:8px;height:8px;border-radius:50%;background:var(--surf-3);border:1px solid var(--line-hi)}
+.rz-kademe i.on{background:var(--rc);border-color:var(--rc)}
+@media(max-width:640px){.rz-grid{grid-template-columns:1fr 1fr}}
+
+/* tema seçici */
+.tema-sec{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
+.tema-sec label{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:var(--sp-3) var(--sp-2);cursor:pointer;
+  border:1px solid var(--line);border-radius:var(--r-md);background:var(--surf-2);font-size:var(--fs-xs);font-weight:var(--fw-semibold);text-align:center}
+.tema-sec input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.tema-sec label:has(input:checked){border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 35%,transparent)}
+.tema-sec label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.tema-ornek{width:100%;height:34px;border-radius:var(--r-sm);border:1px solid rgba(127,127,127,.25)}
+
 .ck-gun{display:flex;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;padding:var(--sp-4) 18px var(--sp-2);
   border-top:1px solid var(--line);font-size:var(--fs-sm);font-weight:var(--fw-bold)}
 .ck-gun small{color:var(--dim);font-weight:var(--fw-semibold);font-variant-numeric:tabular-nums}
@@ -609,6 +664,10 @@ button.pm:hover{border-color:var(--sc)}
       <p class="empty-sub">Çalışma sekmesinden bir konu işaretle, öğrenmeni gir — grafikler burada canlansın.</p>
     </div>
     <div class="card-block">
+      <h2>Rozetlerin</h2>
+      <div id="rozetWrap"></div>
+    </div>
+    <div class="card-block">
       <h2>Genel İlerleme</h2>
       <div class="gi" id="giWrap"></div>
     </div>
@@ -629,8 +688,8 @@ button.pm:hover{border-color:var(--sc)}
       <div id="barAYT" class="bar-chart"></div>
     </div>
     <div class="card-block">
-      <h2>Çalışma Isı Haritası <small class="hm-sub">(son 12 hafta)</small></h2>
-      <div id="heatmapWrap" class="heatmap-wrap"></div>
+      <h2>Çalışma Bahçen <small class="hm-sub">(son 12 hafta)</small></h2>
+      <div id="bahceWrap"></div>
     </div>
     <div class="card-block">
       <h2>TYT vs AYT</h2>
@@ -683,6 +742,15 @@ button.pm:hover{border-color:var(--sc)}
 
   <!-- ===== AYARLAR ===== -->
   <section id="view-ayarlar" class="wrap" hidden>
+    <div class="setcard">
+      <h3>🎨 Tema</h3>
+      <div class="tema-sec" id="tema-sec">
+        <label><input type="radio" name="tema" value=""><span class="tema-ornek" style="background:linear-gradient(135deg,#0a0c14 50%,#f6f8fd 50%)"></span>🌌 Gece Mavisi</label>
+        <label><input type="radio" name="tema" value="orman"><span class="tema-ornek" style="background:linear-gradient(135deg,#0b1410,#22392c 60%,#34c37a)"></span>🌲 Orman</label>
+        <label><input type="radio" name="tema" value="gunbatimi"><span class="tema-ornek" style="background:linear-gradient(135deg,#fff6ee,#f5e1cf 55%,#e2593a)"></span>🌅 Gün Batımı</label>
+      </div>
+      <p class="ayr-hint" style="margin:10px 0 0">Gece Mavisi telefonunun açık/koyu ayarına uyar.</p>
+    </div>
     <div class="setcard">
       <h3>🎯 Hedef Üniversite/Bölüm</h3>
       <form id="ayr-hedef-form">
@@ -988,11 +1056,13 @@ function dashAndBar(tr){
 // ---- pozitif kutlama: konfeti + toast (baskı yok, geri sayım yok) ----
 const celebrated=new Set();
 function celebrate(det,dname){
+  const badge=det.querySelector(".pct").getBoundingClientRect();
+  konfeti(badge.left+badge.width/2,badge.top+badge.height/2,getComputedStyle(det).getPropertyValue("--sc").trim()||"#5b7fff");
+  showToast(`${dname} tamamlandı 🎉`,"warm");
+}
+function konfeti(cx,cy,sc,adet=12){
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
-    const sc=getComputedStyle(det).getPropertyValue("--sc").trim()||"#5b7fff";
-    const badge=det.querySelector(".pct").getBoundingClientRect();
-    const cx=badge.left+badge.width/2, cy=badge.top+badge.height/2;
-    for(let i=0;i<12;i++){
+    for(let i=0;i<adet;i++){
       const p=document.createElement("div");p.className="confetti";p.style.background=sc;
       p.style.left=cx+"px";p.style.top=cy+"px";document.body.appendChild(p);
       const ang=Math.random()*2*Math.PI, dist=60+Math.random()*70;
@@ -1001,7 +1071,6 @@ function celebrate(det,dname){
         {duration:700+Math.random()*300,easing:"cubic-bezier(.22,1,.36,1)"}).onfinish=()=>p.remove();
     }
   }
-  showToast(`${dname} tamamlandı 🎉`,"warm");
 }
 // genel toast — tür: warm(kutlama)/success/warn/info; süre --t-toast token'ından
 const T_TOAST=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--t-toast"))||2200;
@@ -1031,11 +1100,13 @@ document.getElementById("reset").onclick=()=>{
   const yedek={};                                   // silinen kayıtlar geri al için tutulur
   for(const d in DATA[exam])for(const t of DATA[exam][d]){
     const k=id(exam,d,t);
-    if(state[k]){yedek[k]=state[k];delete state[k];}
+    // silmek yerine sıfır kayıt: senkronda diğer cihazdaki eski kayıt geri gelmesin
+    if(state[k]){yedek[k]=state[k];state[k]={s:0,t:0,m:0,last:Date.now()};}
   }
   save();render();
   showToast(exam+" sıfırlandı.","warn",{etiket:"Geri al",sure:9000,fn:()=>{
-    Object.assign(state,yedek);save();render();showToast("Verilerin geri geldi.","success");
+    for(const k in yedek)state[k]={...yedek[k],last:Date.now()};
+    save();render();showToast("Verilerin geri geldi.","success");
   }});
 };
 
@@ -1122,37 +1193,6 @@ function barsSVG(ex){
     y+=rowH;
   });
   return `<svg viewBox="0 0 ${w} ${y+8}" width="100%" height="${y+8}">${rects}</svg>`;
-}
-function heatLevel(c){return c<=0?0:c<=2?1:c<=5?2:3}
-function heatmapSVG(){
-  const act=JSON.parse(localStorage.getItem(ACT_KEY)||"{}");
-  const cell=11,gap=3,padTop=14,padL=20;
-  const end=new Date();end.setHours(0,0,0,0);
-  const start=new Date(end);start.setDate(start.getDate()-83);
-  const startDow=(start.getDay()+6)%7;start.setDate(start.getDate()-startDow);
-  const numDays=Math.round((end-start)/86400000)+1;
-  const numWeeks=Math.ceil(numDays/7);
-  const lvlColor=["var(--card2)","color-mix(in srgb,var(--accent) 30%,var(--card2))",
-    "color-mix(in srgb,var(--accent) 60%,var(--card2))","var(--accent)"];
-  const wd=["Pzt","","Çar","","Cum","",""];
-  let cells="",labels="";
-  wd.forEach((l,i)=>{if(l)labels+=`<text x="0" y="${padTop+i*(cell+gap)+cell-1}" font-size="12" fill="var(--dim)">${l}</text>`;});
-  for(let w=0;w<numWeeks;w++){
-    for(let d=0;d<7;d++){
-      const dt=new Date(start);dt.setDate(dt.getDate()+w*7+d);
-      if(dt>end)continue;
-      const key=ymd(dt),cnt=act[key]||0,lvl=heatLevel(cnt);
-      const x=padL+w*(cell+gap),y=padTop+d*(cell+gap);
-      cells+=`<rect x="${x}" y="${y}" width="${cell}" height="${cell}" rx="2" style="fill:${lvlColor[lvl]}" stroke="var(--line)" stroke-width=".5">
-        <title>${key} — ${cnt} kayıt</title></rect>`;
-    }
-  }
-  const w=padL+numWeeks*(cell+gap),h=padTop+7*(cell+gap);
-  return `<svg viewBox="0 0 ${w} ${h}" width="100%" height="${h}">${labels}${cells}</svg>
-    <div class="hm-legend"><b>Az</b>
-      <i style="background:${lvlColor[0]}"></i><i style="background:${lvlColor[1]}"></i>
-      <i style="background:${lvlColor[2]}"></i><i style="background:${lvlColor[3]}"></i>
-    <b>Çok</b></div>`;
 }
 function renderCompare(){
   const t=examAgg("TYT"),a=examAgg("AYT");
@@ -1274,7 +1314,7 @@ function renderKanit(){
 function renderStats(){
   const o=overallAgg();
   // hiç veri yoksa: sessiz sıfır grafikler yerine tek yönlendirici mesaj
-  const bos=(o.studied+o.tested)===0;
+  const bos=(o.studied+o.tested)===0&&!calismalar.length&&!denemeler.length;
   document.getElementById("statsEmpty").hidden=!bos;
   document.querySelectorAll("#view-stats .card-block:not(.stats-empty)").forEach(c=>c.hidden=bos);
   if(bos)return;
@@ -1283,11 +1323,11 @@ function renderStats(){
   renderKalibrasyon();
   document.getElementById("barTYT").innerHTML=barsSVG("TYT");
   document.getElementById("barAYT").innerHTML=barsSVG("AYT");
-  document.getElementById("heatmapWrap").innerHTML=heatmapSVG();
+  document.getElementById("bahceWrap").innerHTML=bahceHTML();
+  document.getElementById("rozetWrap").innerHTML=rozetHTML();
   renderCompare();
   playFills(document.getElementById("view-stats"));
 }
-console.assert(heatLevel(0)===0&&heatLevel(2)===1&&heatLevel(5)===2&&heatLevel(6)===3,"heatLevel eşik bozuk");
 
 // ==================== DENEMELER MODÜLÜ ====================
 const DN_KEY="yks_denemeler_v1";
@@ -1357,7 +1397,7 @@ function dnRenderList(){
 }
 function dnDelete(idVal){
   if(!confirm("Bu denemeyi sil? Bu geri alınamaz."))return;
-  denemeler=denemeler.filter(x=>x.id!==idVal);
+  denemeler=denemeler.filter(x=>x.id!==idVal);silindi(idVal);
   dnSave();dnRenderList();dnRenderChart();
 }
 function dnRenderChart(){
@@ -1430,7 +1470,7 @@ console.assert(dnNet(0,0)===0,"dnNet sıfır durumu bozuk");
 // ==================== AYARLAR MODÜLÜ ====================
 const HEDEF_KEY="yks_hedef_v1";
 const CUSTOM_KEY="yks_custom_topics_v1";
-const BACKUP_KEYS=["yks_takip_v1","yks_denemeler_v1","yks_hedef_v1","yks_aktivite_v1","yks_custom_topics_v1","yks_calisma_v1"];
+const BACKUP_KEYS=["yks_takip_v1","yks_denemeler_v1","yks_hedef_v1","yks_aktivite_v1","yks_custom_topics_v1","yks_calisma_v1","yks_silinen_v1"];
 const BACKUP_V=1;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function applyCustomTopics(){
@@ -1630,7 +1670,7 @@ document.getElementById("kanit").addEventListener("click",e=>{
 // ==================== BUGÜN: sayaç + çalışma günlüğü + haftalık program + hesap/senkron ====================
 const CK_KEY="yks_calisma_v1",SY_KEY="yks_sayac_v1",PRG_KEY="yks_program_v1";
 const OTURUM_KEY="yks_oturum",VERI_TS_KEY="yks_veri_ts",KOC_OGR_KEY="yks_koc_ogr";
-const CIHAZ_KEYS=[...BACKUP_KEYS,VERI_TS_KEY,PRG_KEY,KOC_OGR_KEY,SY_KEY];
+const CIHAZ_KEYS=[...BACKUP_KEYS,VERI_TS_KEY,PRG_KEY,KOC_OGR_KEY,SY_KEY,"yks_rozet_v1"];
 const $=i=>document.getElementById(i);
 const bugunYmd=()=>ymd(new Date());
 let calismalar=JSON.parse(localStorage.getItem(CK_KEY)||"[]");   // {id,tarih,ex,ders,konu,dk,soru}
@@ -1722,7 +1762,7 @@ $("ck-form").addEventListener("submit",e=>{
 });
 $("ck-gecmis").addEventListener("click",e=>{
   const b=e.target.closest(".dn-del");if(!b||!confirm("Bu çalışma kaydı silinsin mi?"))return;
-  calismalar=calismalar.filter(c=>c.id!==b.dataset.id);ckSave();renderBugunSekme();
+  calismalar=calismalar.filter(c=>c.id!==b.dataset.id);silindi(b.dataset.id);ckSave();renderBugunSekme();
 });
 function renderGecmis(){
   if(!calismalar.length){
@@ -1832,13 +1872,104 @@ $("pr-ileri").onclick=()=>{haftaOfset++;renderProgram();};
 
 function renderBugunSekme(){
   renderProgram();renderGecmis();syCiz();
-  const l=calismalar.filter(c=>c.tarih===bugunYmd());
-  $("sy-bugun").textContent="Bugün toplam: "+(ozet(topla(l,"dk"),topla(l,"soru"))||"henüz kayıt yok");
+  const l=calismalar.filter(c=>c.tarih===bugunYmd()),a=agac(topla(l,"dk"));
+  $("sy-bugun").textContent="Bugün toplam: "+(ozet(topla(l,"dk"),topla(l,"soru"))||"henüz kayıt yok")+(a?" · bugünkü ağacın "+a[1]:"");
+}
+
+// ---- çalışma bahçesi: çalışılan her gün bir fidan, süre arttıkça ağaç büyür ----
+const AGAC=[[240,"🌸",1],[120,"🌲",.9],[60,"🌳",.8],[30,"🌿",.68],[1,"🌱",.56]];   // [en az dk, ağaç, boy]
+const agac=(dk,akt)=>AGAC.find(([e])=>dk>=e)||(akt?AGAC[4]:null);
+console.assert(agac(0,0)===null&&agac(0,3)[1]==="🌱"&&agac(45)[1]==="🌿"&&agac(300)[1]==="🌸","ağaç eşikleri bozuk");
+function gunlukDk(){const m={};for(const c of calismalar)m[c.tarih]=(m[c.tarih]||0)+(c.dk||0);return m;}
+function aktifGunler(){
+  const dk=gunlukDk(),act=JSON.parse(localStorage.getItem(ACT_KEY)||"{}");
+  return new Set([...Object.keys(dk).filter(g=>dk[g]>0),...Object.keys(act).filter(g=>act[g]>0)]);
+}
+function seriHesap(aktif){
+  let enUzun=0,cur=0,prev=null;
+  for(const g of [...aktif].sort()){cur=prev&&gunEkle(prev,1)===g?cur+1:1;enUzun=Math.max(enUzun,cur);prev=g;}
+  let simdi=0,g=aktif.has(bugunYmd())?bugunYmd():gunEkle(bugunYmd(),-1);
+  while(aktif.has(g)){simdi++;g=gunEkle(g,-1);}
+  return {simdi,enUzun};
+}
+console.assert(seriHesap(new Set(["2020-01-01","2020-01-02","2020-01-04"])).enUzun===2,"seri hesabı bozuk");
+function bahceHTML(){
+  const dk=gunlukDk(),act=JSON.parse(localStorage.getItem(ACT_KEY)||"{}"),bugun=bugunYmd(),aktif=aktifGunler();
+  const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7-77);   // 12 hafta önceki pazartesi
+  const bas=ymd(d);
+  let hucre=["Pzt","","Çar","","Cum","","Paz"].map(g=>`<span class="bh-gun">${g}</span>`).join(""),dikilen=0;
+  for(let i=0;i<84;i++){
+    const g=gunEkle(bas,i),a=g<=bugun&&agac(dk[g]||0,act[g]);
+    if(a)dikilen++;
+    hucre+=`<span class="bh${a?" dolu":""}${g===bugun?" bh-bugun":""}${g>bugun?" sonra":""}"${g<=bugun
+      ?` title="${gunYaz(g)} · ${dk[g]?sureYaz(dk[g]):act[g]?"konu çalışması":"boş"}"`:""}>${a?`<i style="--boy:${a[2]}">${a[1]}</i>`:""}</span>`;
+  }
+  const s=seriHesap(aktif);
+  return `<div class="bh-ozet"><span>🌳 <b>${dikilen}</b> ağaç</span><span>🔥 seri <b>${s.simdi}</b> gün</span>
+      <span>en uzun <b>${s.enUzun}</b> gün</span><span>⏳ toplam <b>${sureYaz(topla(calismalar,"dk"))}</b></span></div>
+    <div class="bahce" role="img" aria-label="Son 12 haftada ${dikilen} gün çalıştın, şu anki serin ${s.simdi} gün">${hucre}</div>
+    <div class="bh-lejant"><span>🌱 başladın</span><span>🌿 30 dk</span><span>🌳 1 sa</span><span>🌲 2 sa</span><span>🌸 4 sa+</span></div>`;
+}
+
+// ---- rozetler: kademeli (bronz/gümüş/altın) ve tek seferlik başarılar ----
+const RZ_KEY="yks_rozet_v1";
+const ROZETLER=[
+  {id:"ilk",ik:"✨",ad:"İlk Kıvılcım",esik:[1],ac:()=>"İlk çalışma kaydını gir",v:o=>o.kayit},
+  {id:"seri",ik:"🔥",ad:"Sönmeyen Ateş",esik:[3,7,30],ac:n=>`${n} gün üst üste çalış`,v:o=>o.seri.enUzun},
+  {id:"saat",ik:"⏳",ad:"Kum Saati",esik:[10,50,200],ac:n=>`Toplam ${n} saat çalış`,v:o=>Math.floor(o.dk/60)},
+  {id:"soru",ik:"🎯",ad:"Soru Avcısı",esik:[100,1000,5000],ac:n=>`Toplam ${n} soru çöz`,v:o=>o.soru},
+  {id:"bahce",ik:"🌳",ad:"Yeşil Parmak",esik:[5,20,60],ac:n=>`Bahçene ${n} ağaç dik`,v:o=>o.gun},
+  {id:"uzun",ik:"🏔️",ad:"Uzun Yol",esik:[1,3,5],ac:n=>`Bir günde ${n} saat çalış`,v:o=>Math.floor(o.enUzunGun/60)},
+  {id:"soz",ik:"🤝",ad:"Söz Tutan",esik:[1,10,40],ac:n=>`Koçunun programından ${n} madde tamamla`,v:o=>o.tamamMadde},
+  {id:"kasif",ik:"🗺️",ad:"Konu Kaşifi",esik:[10,50,150],ac:n=>`${n} konu çalış`,v:o=>o.konu},
+  {id:"renk",ik:"🧩",ad:"Çok Renkli Hafta",esik:[3,5,8],ac:n=>`Bir haftada ${n} farklı ders çalış`,v:o=>o.haftaDers},
+  {id:"deneme",ik:"📝",ad:"Deneme Tozu",esik:[1,5,15],ac:n=>`${n} deneme çöz`,v:o=>o.deneme},
+  {id:"safak",ik:"🌅",ad:"Şafak Bekçisi",esik:[1],ac:()=>"Sabah 8'den önce çalışma kaydet",v:o=>o.sabah},
+  {id:"gece",ik:"🦉",ad:"Gece Kuşu",esik:[1],ac:()=>"Gece 11'den sonra çalışma kaydet",v:o=>o.gece},
+  {id:"zirve",ik:"🏆",ad:"Zirve Netin",esik:[1],ac:()=>"Bir denemede kendi rekorunu kır",v:o=>o.rekor},
+];
+const KADEME=["","Bronz","Gümüş","Altın"],KADEME_RENK=["var(--line-hi)","#cd8a4f","#b8c2d6","#f5c542"];
+function rozetVerisi(){
+  const dk=gunlukDk(),bugun=bugunYmd(),saat=c=>new Date(+c.id).getHours(),hafta={};
+  for(const c of calismalar)if(c.ex){
+    const h=gunEkle(c.tarih,-((new Date(c.tarih+"T00:00").getDay()+6)%7));
+    (hafta[h]||=new Set()).add(c.ex+"|"+c.ders);
+  }
+  const sirali=[...denemeler].sort((a,b)=>a.tarih.localeCompare(b.tarih));
+  const rekor=sirali.some((d,i)=>{const once=sirali.slice(0,i).filter(x=>x.tur===d.tur);return once.length&&d.toplamNet>Math.max(...once.map(x=>x.toplamNet));});
+  const aktif=aktifGunler();
+  return {kayit:calismalar.length,seri:seriHesap(aktif),gun:aktif.size,dk:topla(calismalar,"dk"),soru:topla(calismalar,"soru"),
+    enUzunGun:Math.max(0,...Object.values(dk)),konu:Object.values(state).filter(r=>r.s>0).length,
+    tamamMadde:program.filter(p=>p.tarih<=bugun&&ilerleme(p).oran===1).length,
+    haftaDers:Math.max(0,...Object.values(hafta).map(s=>s.size)),deneme:denemeler.length,
+    sabah:calismalar.filter(c=>saat(c)>=4&&saat(c)<8).length,gece:calismalar.filter(c=>saat(c)>=23||saat(c)<4).length,rekor:+rekor};
+}
+const rozetDurum=()=>{const o=rozetVerisi();return ROZETLER.map(r=>{const v=r.v(o);return {...r,v,sev:r.esik.filter(e=>v>=e).length};});};
+function rozetHTML(){
+  const l=rozetDurum(),top=l.reduce((s,r)=>s+r.sev,0),max=l.reduce((s,r)=>s+r.esik.length,0);
+  return `<p class="rz-ust"><b>${top}</b> / ${max} rozet</p><div class="rz-grid">`+l.map(r=>{
+    const tek=r.esik.length===1,tam=r.sev===r.esik.length,hedef=r.esik[Math.min(r.sev,r.esik.length-1)];
+    return `<div class="rz${r.sev?" ok":""}" style="--rc:${KADEME_RENK[tek?(r.sev?3:0):r.sev]}">
+      <span class="rz-ik" aria-hidden="true">${r.ik}</span>
+      <b class="rz-ad">${r.ad}${!tek&&r.sev?` <small>${KADEME[r.sev]}</small>`:""}</b>
+      <span class="rz-ac">${tam?"✓ "+r.ac(r.esik[r.esik.length-1]):r.ac(hedef)}</span>
+      ${tam||tek?"":`<span class="rz-bar"><i style="width:${Math.round(Math.min(1,r.v/hedef)*100)}%"></i></span><span class="rz-say">${Math.min(r.v,hedef)} / ${hedef}</span>`}
+      ${tek?"":`<span class="rz-kademe" aria-label="${r.sev}/3 kademe">${r.esik.map((_,i)=>`<i class="${i<r.sev?"on":""}"></i>`).join("")}</span>`}
+    </div>`;}).join("")+"</div>";
+}
+function rozetKontrol(){
+  const l=rozetDurum(),onceki=JSON.parse(localStorage.getItem(RZ_KEY)||"null");
+  localStorage.setItem(RZ_KEY,JSON.stringify(Object.fromEntries(l.map(r=>[r.id,r.sev]))));
+  const yeni=onceki?l.filter(r=>r.sev>(onceki[r.id]||0)):l.filter(r=>r.sev);
+  if(!yeni.length)return;
+  const r=yeni[0],git={etiket:"Gör",sure:6000,fn:()=>showView("stats")};
+  showToast(!onceki?"rozetlerin hazır 🏅":yeni.length>1?`${yeni.length} yeni rozet 🏅`
+    :`yeni rozet · ${r.ik} ${r.ad}${r.esik.length>1?" "+KADEME[r.sev]:""}`,"warm",git);
+  konfeti(innerWidth/2,innerHeight-120,"#f5c542",18);
 }
 
 // ---- sunucu: hesap + senkron (worker.js) ----
-// Öğrenci verisinin tamamı tek anlık görüntü olarak gider; yeni olan kazanır.
-// ponytail: iki cihazda aynı anda çevrimdışı değişiklik yapılırsa eski olan kaybolur; gerekirse kayıt bazında birleştirme.
+// Cihaz anlık görüntüsünü gönderir; sunucu hesaptakiyle kayıt kayıt birleştirip sonucu döner (worker.js birlestir).
 function api(yol,opt={}){
   return fetch("/api/"+yol,{cache:"no-store",...opt,
     headers:{"content-type":"application/json",...(oturum?{authorization:"Bearer "+oturum.token}:{})}})
@@ -1855,31 +1986,42 @@ function anlik(){
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)try{data[k]=JSON.parse(v)}catch{}});
   return data;
 }
-function veriYukle(s){
-  BACKUP_KEYS.forEach(k=>k in s.data?localStorage.setItem(k,JSON.stringify(s.data[k])):localStorage.removeItem(k));
-  localStorage.setItem(VERI_TS_KEY,s.ts);
-  location.reload();
+function silindi(id){
+  const l=JSON.parse(localStorage.getItem("yks_silinen_v1")||"[]");l.push(id);
+  localStorage.setItem("yks_silinen_v1",JSON.stringify(l));
 }
+// anahtar ve liste sırasından bağımsız karşılaştırma (sunucu birleştirince sıra değişebilir)
+const kanon=v=>JSON.stringify(v,(k,x)=>Array.isArray(x)?(x.every(e=>e&&e.id)?[...x].sort((a,b)=>a.id<b.id?-1:1):x)
+  :x&&typeof x==="object"?Object.fromEntries(Object.entries(x).sort(([a],[b])=>a<b?-1:1)):x);
+console.assert(kanon({b:1,a:[{id:"2"},{id:"1"}]})===kanon({a:[{id:"1"},{id:"2"}],b:1}),"kanon sıraya bağımlı");
+function uygula(s){
+  if(!s||!s.data)return;
+  localStorage.setItem(VERI_TS_KEY,s.ts);
+  const yerel=anlik(),degisen=BACKUP_KEYS.filter(k=>kanon(s.data[k])!==kanon(yerel[k]));
+  degisen.forEach(k=>k in s.data?localStorage.setItem(k,JSON.stringify(s.data[k])):localStorage.removeItem(k));
+  if(degisen.includes("yks_takip_v1")){state=s.data.yks_takip_v1||{};render();}
+  if(degisen.includes("yks_denemeler_v1")){denemeler=s.data.yks_denemeler_v1||[];dnRenderList();dnRenderChart();}
+  if(degisen.includes("yks_calisma_v1"))calismalar=s.data.yks_calisma_v1||[];
+  if(degisen.includes("yks_hedef_v1"))dash();
+  if(degisen.length){renderBugunSekme();if(!$("view-stats").hidden)renderStats();}
+  kocBantCiz();
+}
+// Öğrenci: değişiklik varsa gönderir (birleşik sonuç döner), yoksa sadece çeker. Koç: sadece çeker.
 let sonGonderilen=null;
 function senkron(acil){
-  if(!oturum||KOC)return Promise.resolve(true);
-  const data=anlik(),govde=JSON.stringify(data);
-  if(govde===sonGonderilen)return Promise.resolve(true);
-  const ts=Date.now(),body=JSON.stringify({ts,data});
-  return api("veri/"+OGR,{method:"PUT",body,keepalive:!!acil&&body.length<60000})   // keepalive gövde sınırı 64 KB
-    .then(()=>{sonGonderilen=govde;localStorage.setItem(VERI_TS_KEY,ts);return true;})
-    .catch(()=>false);
-}
-function veriCek(){
-  if(!OGR)return;
-  api("veri/"+OGR).then(s=>{
-    const yerelTs=+localStorage.getItem(VERI_TS_KEY)||0;
-    if(KOC){if(s&&s.ts!==yerelTs)veriYukle(s);else kocBantCiz(s);return;}
-    if(!s||s.ts<=yerelTs){if(s&&s.ts===yerelTs)sonGonderilen=JSON.stringify(s.data);senkron();return;}
-    // hesapta daha yeni veri var; bu cihazda hiç gönderilmemiş veri de varsa hangisi kalsın diye sor
-    if(!yerelTs&&yerelDolu()&&confirm("Bu cihazda hesabına yüklenmemiş veriler var.\n\nTamam: bu cihazdakiler hesabına yüklensin.\nİptal: hesabındaki veriler bu cihaza gelsin."))senkron();
-    else veriYukle(s);
-  }).catch(()=>{if(KOC)kocBantCiz();});
+  if(!oturum||!OGR)return Promise.resolve(true);
+  const govde=JSON.stringify(anlik()),gonder=!KOC&&govde!==sonGonderilen;
+  if(acil&&!gonder)return Promise.resolve(true);
+  return (gonder
+    ?api("veri/"+OGR,{method:"PUT",body:JSON.stringify({data:JSON.parse(govde)}),keepalive:!!acil&&govde.length<60000})   // keepalive gövde sınırı 64 KB
+    :api("veri/"+OGR))
+    .then(s=>{
+      if(JSON.stringify(anlik())!==govde)return senkron();   // istek sürerken yeni değişiklik oldu; onu da gönder
+      uygula(s);sonGonderilen=JSON.stringify(anlik());
+      if(!KOC)rozetKontrol();
+      return true;
+    })
+    .catch(()=>{kocBantCiz();return false;});
 }
 function programCek(){
   if(!OGR)return;
@@ -1968,13 +2110,24 @@ $("koc-ogr").onchange=e=>{
   localStorage.setItem(KOC_OGR_KEY,e.target.value);location.reload();
 };
 
+// ---- tema: cihaza özel, senkron edilmez ----
+const temaMeta=[...document.querySelectorAll('meta[name="theme-color"]')].map(m=>[m,m.content]);
+function temaUygula(t){
+  document.documentElement.dataset.tema=t;
+  const bg=getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+  temaMeta.forEach(([m,orj])=>m.content=t?bg:orj);
+  const r=document.querySelector(`#tema-sec input[value="${t}"]`);if(r)r.checked=true;
+}
+$("tema-sec").addEventListener("change",e=>{localStorage.setItem("yks_tema",e.target.value);temaUygula(e.target.value);});
+temaUygula(localStorage.getItem("yks_tema")||"");
+
 if(oturum){
   konuListesi();renderHesap();kocBantCiz();renderBugunSekme();
-  veriCek();programCek();profilYenile();
-  if(!KOC)setInterval(senkron,60000);   // KV ücretsiz kotası günde 1000 yazma; değişiklik yoksa istek atılmaz
+  senkron();programCek();profilYenile();
+  setInterval(senkron,60000);   // değişiklik yoksa sadece okur; KV ücretsiz kotası günde 1000 yazma
   document.addEventListener("visibilitychange",()=>{
     if(document.hidden)senkron(true);
-    else{veriCek();programCek();renderBugunSekme();}
+    else{senkron();programCek();renderBugunSekme();}
   });
 }
 
