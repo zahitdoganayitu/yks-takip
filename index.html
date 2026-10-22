@@ -400,13 +400,74 @@ body.koc .ogr-only,body:not(.koc) .koc-only{display:none!important}
 .sy-saat{font-size:3.25rem;line-height:var(--lh-tight);font-weight:var(--fw-heavy);text-align:center;margin:var(--sp-2) 0 var(--sp-5);
   font-variant-numeric:tabular-nums lining-nums;letter-spacing:var(--tracking-tight);transition:color var(--t-base)}
 .sy-saat.on{color:var(--good)}
+[hidden]{display:none!important}
+.koc-bant select{max-width:180px}
+
+/* giriş ekranı */
+body.girissiz .navwrap,body.girissiz main,body.girissiz .koc-only{display:none!important}
+body:not(.girissiz) #giris{display:none}
+#giris{max-width:440px;padding-top:var(--sp-7)}
+.g-rol{border:0;padding:0;margin:0 0 var(--sp-3);display:flex;gap:var(--sp-2);flex-wrap:wrap}
+.g-rol legend{font-size:var(--fs-sm);color:var(--dim);font-weight:var(--fw-semibold);margin-bottom:4px}
+.g-rol label{position:relative;flex:1;min-height:var(--hit);display:grid;place-items:center;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surf-2);font-size:var(--fs-sm);font-weight:var(--fw-semibold);cursor:pointer}
+.g-rol input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.g-rol label:has(input:checked){border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,var(--surf-2))}
+.g-rol label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.g-hata{color:var(--bad)}
+.g-hata:empty{display:none}
+.g-gecis{background:none;border:0;color:var(--accent);font-weight:var(--fw-semibold);cursor:pointer;padding:var(--sp-3) 0 0;min-height:var(--hit)}
+
+/* pencereler */
+.dlg{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surf-1);color:var(--txt);padding:var(--sp-5);
+  width:min(480px,calc(100vw - 24px));box-shadow:var(--e2)}
+.dlg::backdrop{background:rgba(5,7,14,.6);backdrop-filter:blur(3px)}
+.dlg[open]{animation:viewIn var(--t-base) var(--ease-in)}
+.dlg h3{margin:0 0 var(--sp-4);font-size:var(--fs-md);line-height:var(--lh-heading)}
+.dlg .dn-field{min-width:120px}
+.dlg-btns{display:flex;gap:var(--sp-2);justify-content:flex-end;flex-wrap:wrap;margin-top:var(--sp-2)}
+
+/* haftalık program */
+.pr-ust{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;margin-bottom:var(--sp-2)}
+.pr-ust h3{margin:0}
+.pr-nav{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);font-weight:var(--fw-semibold)}
+.pr-nav span{min-width:110px;text-align:center}
+.pr-nav button{width:40px;height:40px;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--surf-2);color:var(--txt);cursor:pointer;font-size:20px;line-height:1}
+.pr-nav button:hover{border-color:var(--accent)}
+.pr-ozet{font-size:var(--fs-xs);color:var(--dim);margin-bottom:var(--sp-2);font-variant-numeric:tabular-nums}
+.pr-ozet:empty{display:none}
+.pr-ozet b{color:var(--txt)}
+.pr-gun{border-top:1px solid var(--line);padding:var(--sp-3) 18px;margin:0 -18px}
+.pr-gun.bugun{background:linear-gradient(90deg,color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%)}
+.pr-gun-bas{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);min-height:32px}
+.pr-gun-bas small{color:var(--dim)}
+.pr-gun.bugun .pr-gun-bas b{color:var(--accent)}
+.pr-gun.bugun .pr-gun-bas b::after{content:" · bugün";font-weight:var(--fw-semibold);font-size:var(--fs-2xs)}
+.pr-gun.gecmis .pr-gun-bas{color:var(--dim)}
+.pr-ekle{margin-left:auto;border:1px dashed var(--line-hi);background:transparent;color:var(--dim);border-radius:var(--r-pill);
+  padding:4px 12px;min-height:32px;font-size:var(--fs-xs);font-weight:var(--fw-semibold);cursor:pointer}
+.pr-ekle:hover{border-color:var(--accent);color:var(--accent)}
+.pm{display:flex;align-items:center;gap:var(--sp-3);width:100%;text-align:left;margin-top:var(--sp-2);padding:10px 12px;color:var(--txt);
+  border:1px solid var(--line);border-left:4px solid var(--sc);border-radius:var(--r-md);background:var(--surf-2)}
+button.pm{cursor:pointer}
+button.pm:hover{border-color:var(--sc)}
+.pm .bg-ico{background:color-mix(in srgb,var(--sc) 20%,transparent);border:1px solid color-mix(in srgb,var(--sc) 45%,transparent)}
+.pm-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pm-txt b{font-size:var(--fs-sm);line-height:var(--lh-ui)}
+.pm-not{font-size:var(--fs-xs);color:var(--dim);line-height:var(--lh-help)}
+.pm-bar{height:6px;border-radius:var(--r-pill);background:var(--surf-3);overflow:hidden;margin-top:4px}
+.pm-bar i{display:block;height:100%;border-radius:inherit;background:var(--sc);transition:width var(--t-slow) var(--ease-fill)}
+.pm-durum{font-size:var(--fs-2xs);color:var(--dim);font-variant-numeric:tabular-nums}
+.pm.tamam{border-color:color-mix(in srgb,var(--good) 45%,var(--line));border-left-color:var(--good)}
+.pm.tamam .pm-bar i{background:var(--good)}
+.pm.tamam .pm-durum{color:var(--good);font-weight:var(--fw-bold)}
+.pm-basla{flex-shrink:0;width:40px;height:40px;border-radius:50%;border:0;cursor:pointer;color:#fff;font-size:14px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-b));box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 35%,transparent)}
+#pr-kopya{margin-top:var(--sp-3)}
+
 .ck-gun{display:flex;justify-content:space-between;gap:var(--sp-3);flex-wrap:wrap;padding:var(--sp-4) 18px var(--sp-2);
   border-top:1px solid var(--line);font-size:var(--fs-sm);font-weight:var(--fw-bold)}
 .ck-gun small{color:var(--dim);font-weight:var(--fw-semibold);font-variant-numeric:tabular-nums}
-.pr-liste .dn-item{padding-inline:0}
-.pr-liste .pr-bugun .bg-konu::after{content:"bugün";margin-left:8px;font-size:var(--fs-2xs);color:var(--accent);font-weight:var(--fw-bold)}
-#pr-form{margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--line)}
-.paylas-link{width:100%;margin-bottom:var(--sp-3)}
 </style>
 
 <header>
@@ -414,8 +475,27 @@ body.koc .ogr-only,body:not(.koc) .koc-only{display:none!important}
     <h1><span>📚</span> YKS Çalışma Takip</h1>
   </div>
 </header>
+<section id="giris" class="wrap">
+  <div class="setcard">
+    <h3 id="g-baslik">Giriş yap</h3>
+    <form id="g-form">
+      <div class="ayr-row"><label for="g-ad">Kullanıcı adı</label>
+        <input class="ayr-input" id="g-ad" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="24" required></div>
+      <div class="ayr-row"><label for="g-sifre">Şifre</label>
+        <input class="ayr-input" id="g-sifre" type="password" autocomplete="current-password" minlength="6" required></div>
+      <fieldset class="g-rol" id="g-rol" hidden>
+        <legend>Ben…</legend>
+        <label><input type="radio" name="rol" value="ogrenci" checked> 🎒 Öğrenciyim</label>
+        <label><input type="radio" name="rol" value="koc"> 🧭 Koçum</label>
+      </fieldset>
+      <p class="ayr-hint g-hata" id="g-hata" role="alert"></p>
+      <button type="submit" class="dn-submit" id="g-gonder">Giriş yap</button>
+    </form>
+    <button type="button" class="g-gecis" id="g-gecis">Hesabın yok mu? Hesap oluştur</button>
+  </div>
+</section>
 <div class="wrap koc-only">
-  <div class="koc-bant"><span id="koc-bilgi">👀 Koç modu</span><button type="button" id="koc-cik" class="ayr-btn">Çık</button></div>
+  <div class="koc-bant"><span id="koc-bilgi">👀</span><select id="koc-ogr" class="ayr-select" aria-label="Öğrenci seç" hidden></select></div>
 </div>
 <div class="navwrap">
   <nav class="mainnav">
@@ -430,20 +510,17 @@ body.koc .ogr-only,body:not(.koc) .koc-only{display:none!important}
   <!-- ===== BUGÜN ===== -->
   <section id="view-bugun" class="wrap">
     <div class="dncard" id="programKart">
-      <h3><span class="ogr-only">📋 Koçunun programı</span><span class="koc-only">📋 Program</span></h3>
-      <div id="programListe" class="pr-liste"></div>
-      <form id="pr-form" class="koc-only">
-        <div class="dn-row">
-          <div class="dn-field"><label for="pr-tarih">Gün</label><input type="date" id="pr-tarih" required></div>
-          <div class="dn-field"><label for="pr-ders">Ders</label><select id="pr-ders" class="ders-sec"></select></div>
+      <div class="pr-ust">
+        <h3>📋 <span class="ogr-only">Koçunun programı</span><span class="koc-only">Haftalık program</span></h3>
+        <div class="pr-nav">
+          <button type="button" id="pr-geri" aria-label="Önceki hafta">‹</button>
+          <span id="pr-hafta"></span>
+          <button type="button" id="pr-ileri" aria-label="Sonraki hafta">›</button>
         </div>
-        <div class="dn-row">
-          <div class="dn-field" style="flex:2"><label for="pr-not">Ne yapacak</label><input type="text" id="pr-not" maxlength="120" placeholder="örn. Türev tekrarı + 2 test"></div>
-          <div class="dn-field"><label for="pr-dk">Hedef süre (dk)</label><input type="number" id="pr-dk" min="0" max="900" inputmode="numeric"></div>
-          <div class="dn-field"><label for="pr-soru">Hedef soru</label><input type="number" id="pr-soru" min="0" max="3000" inputmode="numeric"></div>
-        </div>
-        <button type="submit" class="dn-submit">Programa ekle</button>
-      </form>
+      </div>
+      <div id="pr-ozet" class="pr-ozet"></div>
+      <div id="pr-gunler"></div>
+      <button type="button" id="pr-kopya" class="ayr-btn koc-only" hidden>Geçen haftanın programını kopyala</button>
     </div>
     <div class="dncard ogr-only">
       <h3>⏱️ Çalışma sayacı</h3>
@@ -454,29 +531,58 @@ body.koc .ogr-only,body:not(.koc) .koc-only{display:none!important}
       <div class="ayr-btns">
         <button type="button" id="sy-basla" class="dn-submit">Başlat</button>
         <button type="button" id="sy-bitir" class="ayr-btn">Bitir ve kaydet</button>
+        <button type="button" id="ck-elle" class="ayr-btn" style="margin-left:auto">＋ Elle ekle</button>
       </div>
       <p class="ayr-hint" id="sy-bugun" style="margin:12px 0 0"></p>
-    </div>
-    <div class="dncard ogr-only">
-      <h3>✍️ Çalışma ekle</h3>
-      <form id="ck-form">
-        <div class="dn-row">
-          <div class="dn-field"><label for="ck-tarih">Tarih</label><input type="date" id="ck-tarih" required></div>
-          <div class="dn-field"><label for="ck-ders">Ders</label><select id="ck-ders" class="ders-sec"></select></div>
-        </div>
-        <div class="dn-row">
-          <div class="dn-field" style="flex:2"><label for="ck-konu">Konu (isteğe bağlı)</label><input type="text" id="ck-konu" list="ck-konular" maxlength="80"><datalist id="ck-konular"></datalist></div>
-          <div class="dn-field"><label for="ck-dk">Süre (dk)</label><input type="number" id="ck-dk" min="0" max="900" inputmode="numeric"></div>
-          <div class="dn-field"><label for="ck-soru">Çözülen soru</label><input type="number" id="ck-soru" min="0" max="3000" inputmode="numeric"></div>
-        </div>
-        <button type="submit" class="dn-submit">Kaydet</button>
-      </form>
     </div>
     <div class="dncard" style="padding:0">
       <h3 style="padding:18px 18px 0">Çalışma geçmişi</h3>
       <div id="ck-gecmis"></div>
     </div>
   </section>
+
+  <dialog id="ck-dlg" class="dlg" aria-labelledby="ck-dlg-baslik">
+    <form id="ck-form">
+      <h3 id="ck-dlg-baslik">✍️ Çalışmayı kaydet</h3>
+      <div class="dn-row">
+        <div class="dn-field"><label for="ck-tarih">Tarih</label><input type="date" id="ck-tarih" required></div>
+        <div class="dn-field"><label for="ck-ders">Ders</label><select id="ck-ders" class="ders-sec"></select></div>
+      </div>
+      <div class="dn-row">
+        <div class="dn-field"><label for="ck-konu">Konu (isteğe bağlı)</label><input type="text" id="ck-konu" list="ck-konular" maxlength="80"><datalist id="ck-konular"></datalist></div>
+      </div>
+      <div class="dn-row">
+        <div class="dn-field"><label for="ck-dk">Süre (dk)</label><input type="number" id="ck-dk" min="0" max="900" inputmode="numeric"></div>
+        <div class="dn-field"><label for="ck-soru">Çözülen soru</label><input type="number" id="ck-soru" min="0" max="3000" inputmode="numeric"></div>
+      </div>
+      <div class="dlg-btns">
+        <button type="button" class="ayr-btn" data-kapat>Vazgeç</button>
+        <button type="submit" class="dn-submit">Kaydet</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="pr-dlg" class="dlg" aria-labelledby="pr-dlg-baslik">
+    <form id="pr-form">
+      <h3 id="pr-dlg-baslik">Programa ekle</h3>
+      <div class="dn-row">
+        <div class="dn-field"><label for="pr-tarih">Gün</label><input type="date" id="pr-tarih" required></div>
+        <div class="dn-field"><label for="pr-ders">Ders</label><select id="pr-ders" class="ders-sec"></select></div>
+      </div>
+      <div class="dn-row">
+        <div class="dn-field"><label for="pr-not">Ne yapacak</label><input type="text" id="pr-not" maxlength="120" placeholder="örn. Türev tekrarı + 2 test"></div>
+      </div>
+      <div class="dn-row">
+        <div class="dn-field"><label for="pr-dk">Hedef süre (dk)</label><input type="number" id="pr-dk" min="0" max="900" inputmode="numeric"></div>
+        <div class="dn-field"><label for="pr-soru">Hedef soru</label><input type="number" id="pr-soru" min="0" max="3000" inputmode="numeric"></div>
+      </div>
+      <div class="dlg-btns">
+        <button type="button" class="ayr-btn danger" id="pr-sil" style="margin-right:auto">Sil</button>
+        <button type="button" class="ayr-btn" data-kapat>Vazgeç</button>
+        <button type="submit" class="dn-submit">Kaydet</button>
+      </div>
+    </form>
+  </dialog>
 
   <section id="view-work" class="wrap" hidden>
     <div class="dash" id="dash"></div>
@@ -612,14 +718,16 @@ body.koc .ogr-only,body:not(.koc) .koc-only{display:none!important}
         <input type="file" id="ayr-backup-yukle-input" class="ayr-file" accept="application/json">
       </div>
     </div>
-    <div class="setcard ogr-only">
-      <h3>👥 Koç bağlantısı</h3>
-      <p class="ayr-hint" id="paylas-durum"></p>
-      <input class="ayr-input paylas-link" id="paylas-link" readonly aria-label="Koç bağlantısı" hidden>
+    <div class="setcard">
+      <h3>👤 Hesap</h3>
+      <p class="ayr-hint" id="hesap-bilgi"></p>
+      <form id="koc-form" class="ayr-btns ogr-only" style="margin-bottom:12px">
+        <input class="ayr-input" id="koc-ad" placeholder="Koçunun kullanıcı adı" aria-label="Koçunun kullanıcı adı" autocapitalize="none" spellcheck="false" maxlength="24" required style="flex:1;min-width:160px">
+        <button type="submit" class="ayr-btn primary">Koçu bağla</button>
+      </form>
       <div class="ayr-btns">
-        <button type="button" id="paylas-ac" class="ayr-btn primary">Koçla paylaşmayı aç</button>
-        <button type="button" id="paylas-kopya" class="ayr-btn primary">Bağlantıyı paylaş</button>
-        <button type="button" id="paylas-kapat" class="ayr-btn danger">Paylaşımı kapat</button>
+        <button type="button" id="koc-kaldir" class="ayr-btn ogr-only">Koçu kaldır</button>
+        <button type="button" id="cikis" class="ayr-btn danger">Çıkış yap</button>
       </div>
     </div>
     <div class="setcard">
@@ -1519,35 +1627,33 @@ document.getElementById("kanit").addEventListener("click",e=>{
   konuyaGit(b.dataset.ex,b.dataset.ders,b.dataset.konu);
 });
 
-// ==================== BUGÜN: sayaç + çalışma günlüğü + koç programı/senkron ====================
+// ==================== BUGÜN: sayaç + çalışma günlüğü + haftalık program + hesap/senkron ====================
 const CK_KEY="yks_calisma_v1",SY_KEY="yks_sayac_v1",PRG_KEY="yks_program_v1";
-const PAYLAS_KEY="yks_paylas_kod",KOC_KEY="yks_koc_kod",KOC_TS_KEY="yks_koc_ts";
+const OTURUM_KEY="yks_oturum",VERI_TS_KEY="yks_veri_ts",KOC_OGR_KEY="yks_koc_ogr";
+const CIHAZ_KEYS=[...BACKUP_KEYS,VERI_TS_KEY,PRG_KEY,KOC_OGR_KEY,SY_KEY];
 const $=i=>document.getElementById(i);
 const bugunYmd=()=>ymd(new Date());
 let calismalar=JSON.parse(localStorage.getItem(CK_KEY)||"[]");   // {id,tarih,ex,ders,konu,dk,soru}
 let program=JSON.parse(localStorage.getItem(PRG_KEY)||"[]");     // {id,tarih,ex,ders,not,dk,soru}
 let sy=JSON.parse(localStorage.getItem(SY_KEY)||'{"bas":null,"ms":0}');
-
-// koç bağlantısı: ?koc=KOD ile açılınca bu cihaz öğrencinin verisini gösterir
-{
-  const q=new URLSearchParams(location.search).get("koc");
-  if(q&&q!==localStorage.getItem(KOC_KEY)&&confirm("Koç modu açılacak: bu cihazdaki YKS verileri öğrencinin verileriyle değiştirilecek. Devam?")){
-    localStorage.setItem(KOC_KEY,q);localStorage.removeItem(KOC_TS_KEY);
-  }
-  if(q)history.replaceState(null,"",location.pathname);
-}
-const KOC=localStorage.getItem(KOC_KEY);
-document.body.classList.toggle("koc",!!KOC);
+let oturum=JSON.parse(localStorage.getItem(OTURUM_KEY)||"null"); // {token,ad,rol,koc,ogrenciler}
+const KOC=!!oturum&&oturum.rol==="koc";
+const kocOgr=o=>o.ogrenciler.includes(localStorage.getItem(KOC_OGR_KEY))?localStorage.getItem(KOC_OGR_KEY):o.ogrenciler[0]||null;
+const OGR=!oturum?null:KOC?kocOgr(oturum):oturum.ad;            // ekranda verisi gösterilen öğrenci
+document.body.classList.toggle("koc",KOC);
+document.body.classList.toggle("girissiz",!oturum);
 
 const sureYaz=dk=>dk<60?dk+" dk":Math.floor(dk/60)+" sa"+(dk%60?" "+dk%60+" dk":"");
 console.assert(sureYaz(45)==="45 dk"&&sureYaz(60)==="1 sa"&&sureYaz(135)==="2 sa 15 dk","sureYaz bozuk");
 const gunYaz=t=>new Date(t+"T00:00").toLocaleDateString("tr-TR",{day:"numeric",month:"long",weekday:"long"});
+const kisaGun=t=>new Date(t+"T00:00").toLocaleDateString("tr-TR",{day:"numeric",month:"short"});
 const dersAdi=c=>c.ex?c.ex+" · "+c.ders:c.ders;
 const ozet=(dk,soru)=>[dk?sureYaz(dk):"",soru?soru+" soru":""].filter(Boolean).join(" · ");
+const topla=(l,a)=>l.reduce((s,x)=>s+(x[a]||0),0);
+const gunEkle=(t,n)=>{const d=new Date(t+"T00:00");d.setDate(d.getDate()+n);return ymd(d);};
 function yapilan(tarih,ex,ders){
-  let dk=0,soru=0;
-  for(const c of calismalar)if(c.tarih===tarih&&c.ex===ex&&c.ders===ders){dk+=c.dk;soru+=c.soru;}
-  return {dk,soru};
+  const l=calismalar.filter(c=>c.tarih===tarih&&c.ex===ex&&c.ders===ders);
+  return {dk:topla(l,"dk"),soru:topla(l,"soru")};
 }
 
 document.querySelectorAll(".ders-sec").forEach(s=>s.innerHTML=["TYT","AYT"].map(ex=>
@@ -1558,6 +1664,7 @@ function konuListesi(){
   $("ck-konular").innerHTML=((DATA[ex]||{})[d]||[]).map(t=>`<option value="${esc(t)}">`).join("");
 }
 $("ck-ders").onchange=konuListesi;
+document.querySelectorAll("[data-kapat]").forEach(b=>b.onclick=()=>b.closest("dialog").close());
 
 // ---- sayaç: başlangıç anı saklanır, sayfa kapansa da süre akar ----
 const syMs=()=>sy.ms+(sy.bas?Date.now()-sy.bas:0);
@@ -1569,32 +1676,47 @@ function syCiz(){
   $("sy-basla").textContent=sy.bas?"Duraklat":sy.ms?"Devam et":"Başlat";
   $("sy-bitir").disabled=!syMs();
 }
+function sayacBaslat(dersVal){
+  if(sy.bas&&sy.ders!==dersVal){showToast("Sayaç başka ders için çalışıyor, önce onu bitir.","warn");return;}
+  $("sy-ders").value=sy.ders=dersVal;
+  if(!sy.bas)sy.bas=Date.now();
+  sySave();syCiz();
+  $("sy-zaman").scrollIntoView({behavior:"smooth",block:"center"});
+}
 if(sy.ders)$("sy-ders").value=sy.ders;
 $("sy-ders").onchange=()=>{sy.ders=$("sy-ders").value;sySave();};
 $("sy-basla").onclick=()=>{
   if(sy.bas){sy.ms+=Date.now()-sy.bas;sy.bas=null;}else sy.bas=Date.now();
   sy.ders=$("sy-ders").value;sySave();syCiz();
 };
-$("sy-bitir").onclick=()=>{
-  const dk=Math.max(1,Math.round(syMs()/60000));
-  $("ck-tarih").value=bugunYmd();$("ck-ders").value=$("sy-ders").value;konuListesi();
-  $("ck-dk").value=dk;
-  sy={bas:null,ms:0,ders:sy.ders};sySave();syCiz();
-  $("ck-soru").focus();$("ck-form").scrollIntoView({behavior:"smooth",block:"center"});
-  showToast(`${sureYaz(dk)} forma geldi — soru sayısını yazıp kaydet.`,"info");
-};
 setInterval(()=>{if(sy.bas)syCiz();},1000);
 
-// ---- çalışma günlüğü ----
+// ---- çalışma kaydı: tek pencere; sayaç bitince süre dolu gelir ----
+let ckSayactan=false;
+function ckAc(on={}){
+  $("ck-form").reset();
+  $("ck-tarih").value=bugunYmd();
+  $("ck-ders").value=on.ders||$("sy-ders").value;konuListesi();
+  $("ck-dk").value=on.dk||"";
+  ckSayactan=!!on.dk;
+  $("ck-dlg").showModal();
+  (on.dk?$("ck-soru"):$("ck-dk")).focus();
+}
+$("sy-bitir").onclick=()=>{
+  if(sy.bas){sy.ms+=Date.now()-sy.bas;sy.bas=null;sySave();syCiz();}   // pencere açıkken süre durur; vazgeçilirse kaybolmaz
+  ckAc({ders:sy.ders||$("sy-ders").value,dk:Math.max(1,Math.round(sy.ms/60000))});
+};
+$("ck-elle").onclick=()=>ckAc();
 function ckSave(){localStorage.setItem(CK_KEY,JSON.stringify(calismalar));senkron();}
 $("ck-form").addEventListener("submit",e=>{
   e.preventDefault();
-  const dersVal=$("ck-ders").value,[ex,ders]=dersVal.split("|");
+  const [ex,ders]=$("ck-ders").value.split("|");
   const dk=Math.max(0,Math.round(+$("ck-dk").value||0)),soru=Math.max(0,Math.round(+$("ck-soru").value||0));
   if(!dk&&!soru){showToast("Süre ya da soru sayısı gir.","warn");return;}
   calismalar.push({id:Date.now()+"",tarih:$("ck-tarih").value||bugunYmd(),ex,ders,konu:$("ck-konu").value.trim(),dk,soru});
+  if(ckSayactan){sy={bas:null,ms:0,ders:sy.ders};sySave();}
   ckSave();logAktivite();
-  e.target.reset();$("ck-tarih").value=bugunYmd();$("ck-ders").value=dersVal;
+  $("ck-dlg").close();
   renderBugunSekme();
   showToast(ozet(dk,soru)+" kaydedildi 💪","success");
 });
@@ -1602,144 +1724,259 @@ $("ck-gecmis").addEventListener("click",e=>{
   const b=e.target.closest(".dn-del");if(!b||!confirm("Bu çalışma kaydı silinsin mi?"))return;
   calismalar=calismalar.filter(c=>c.id!==b.dataset.id);ckSave();renderBugunSekme();
 });
-function satir(c,ek,sil,vurgu){
-  const [ic,col]=meta(c.ders);
-  return `<div class="dn-item${vurgu?" pr-bugun":""}">
-    <span class="bg-ico" style="--sc:${col}" aria-hidden="true">${ic}</span>
-    <div style="flex:1;min-width:0"><div class="bg-konu">${esc(dersAdi(c))}${c.konu||c.not?` · ${esc(c.konu||c.not)}`:""}</div>
-      <span class="bg-ders">${ek}</span></div>
-    ${sil?`<button class="dn-del" data-id="${c.id}" aria-label="Kaydı sil">Sil</button>`:""}
-  </div>`;
-}
 function renderGecmis(){
-  if(!calismalar.length){$("ck-gecmis").innerHTML='<div class="dn-empty">Henüz çalışma kaydı yok. Sayacı başlat ya da elle ekle.</div>';return;}
+  if(!calismalar.length){
+    $("ck-gecmis").innerHTML=`<div class="dn-empty">${KOC?"Öğrencin henüz çalışma kaydı girmedi.":"Henüz çalışma kaydı yok. Sayacı başlat ya da elle ekle."}</div>`;return;
+  }
   const gunler={};
   for(const c of calismalar)(gunler[c.tarih]||=[]).push(c);
   $("ck-gecmis").innerHTML=Object.keys(gunler).sort().reverse().map(g=>{
     const l=gunler[g];
-    return `<div class="ck-gun"><span>${gunYaz(g)}</span><small>${ozet(l.reduce((s,c)=>s+c.dk,0),l.reduce((s,c)=>s+c.soru,0))}</small></div>`
-      +l.map(c=>satir(c,ozet(c.dk,c.soru),!KOC)).join("");
+    return `<div class="ck-gun"><span>${gunYaz(g)}</span><small>${ozet(topla(l,"dk"),topla(l,"soru"))}</small></div>`+l.map(c=>{
+      const [ic,col]=meta(c.ders);
+      return `<div class="dn-item">
+        <span class="bg-ico" style="--sc:${col}" aria-hidden="true">${ic}</span>
+        <div style="flex:1;min-width:0"><div class="bg-konu">${esc(dersAdi(c))}${c.konu?` · ${esc(c.konu)}`:""}</div>
+          <span class="bg-ders">${ozet(c.dk,c.soru)}</span></div>
+        ${KOC?"":`<button class="dn-del" data-id="${c.id}" aria-label="Kaydı sil">Sil</button>`}
+      </div>`;}).join("");
   }).join("");
 }
 
-// ---- program: koç yazar, öğrenci görür; geçmiş/bugün maddelerinde yapılanla karşılaştırılır ----
+// ---- haftalık program: koç yazar/düzenler, öğrenci görür ve ▶ ile sayacı başlatır ----
+let haftaOfset=0,prDuzen=null;
+function haftaGunleri(){
+  const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-(d.getDay()+6)%7+haftaOfset*7);
+  return [...Array(7)].map((_,i)=>gunEkle(ymd(d),i));
+}
+function ilerleme(p){
+  const y=yapilan(p.tarih,p.ex,p.ders),o=[];
+  if(p.dk)o.push(Math.min(1,y.dk/p.dk));
+  if(p.soru)o.push(Math.min(1,y.soru/p.soru));
+  return {y,oran:o.length?o.reduce((a,b)=>a+b)/o.length:null};
+}
+console.assert(ilerleme({tarih:"1900-01-01",ex:"",ders:"x",dk:60}).oran===0,"program ilerlemesi bozuk");
+function madde(p,bugun){
+  const [ic,col]=meta(p.ders),{y,oran}=ilerleme(p),gecti=p.tarih<=bugun,tamam=gecti&&oran===1;
+  const durum=!gecti?(p.dk||p.soru?"hedef "+ozet(p.dk,p.soru):"")
+    :oran==null?"":tamam?"✓ tamamlandı"
+    :[p.dk?`${y.dk}/${p.dk} dk`:"",p.soru?`${y.soru}/${p.soru} soru`:""].filter(Boolean).join(" · ");
+  const ic_=`<span class="bg-ico" aria-hidden="true">${ic}</span>
+    <span class="pm-txt"><b>${esc(dersAdi(p))}</b>${p.not?`<span class="pm-not">${esc(p.not)}</span>`:""}
+      ${gecti&&oran!=null?`<span class="pm-bar"><i style="width:${Math.round(oran*100)}%"></i></span>`:""}
+      ${durum?`<span class="pm-durum">${durum}</span>`:""}</span>`;
+  const cls=`pm${tamam?" tamam":""}`;
+  if(KOC)return `<button type="button" class="${cls}" style="--sc:${col}" data-id="${p.id}" aria-label="${esc(dersAdi(p))} maddesini düzenle">${ic_}</button>`;
+  return `<div class="${cls}" style="--sc:${col}">${ic_}${p.tarih===bugun&&!tamam
+    ?`<button type="button" class="pm-basla" data-ders="${p.ex}|${esc(p.ders)}" aria-label="${esc(dersAdi(p))} için sayacı başlat">▶</button>`:""}</div>`;
+}
 function renderProgram(){
-  const bugun=bugunYmd(),bas=KOC?ymd(new Date(Date.now()-14*86400000)):bugun;
-  const liste=program.filter(p=>p.tarih>=bas).sort((a,b)=>a.tarih.localeCompare(b.tarih));
-  $("programKart").hidden=!KOC&&!liste.length;
-  $("programListe").innerHTML=liste.map(p=>{
-    let ek=gunYaz(p.tarih)+(p.dk||p.soru?" · hedef "+ozet(p.dk,p.soru):"");
-    if(p.tarih<=bugun&&(p.dk||p.soru)){
-      const y=yapilan(p.tarih,p.ex,p.ders),tamam=(!p.dk||y.dk>=p.dk)&&(!p.soru||y.soru>=p.soru);
-      ek+=` · <b style="color:${tamam?"var(--good)":"var(--dim)"}">${tamam?"✓ tamam":"yapılan "+(ozet(y.dk,y.soru)||"yok")}</b>`;
-    }
-    return satir(p,ek,!!KOC,p.tarih===bugun);
-  }).join("")||'<div class="dn-empty">Program boş. Aşağıdan gün gün ekle.</div>';
+  const kart=$("programKart");
+  kart.hidden=!OGR||(!KOC&&!oturum.koc&&!program.length);
+  if(kart.hidden)return;
+  const gunler=haftaGunleri(),bugun=bugunYmd(),[ilk,son]=[gunler[0],gunler[6]];
+  const hafta=program.filter(p=>p.tarih>=ilk&&p.tarih<=son);
+  const yapCk=calismalar.filter(c=>c.tarih>=ilk&&c.tarih<=son);
+  $("pr-hafta").textContent=haftaOfset===0?"Bu hafta":`${kisaGun(ilk)} – ${kisaGun(son)}`;
+  $("pr-ozet").innerHTML=hafta.length||yapCk.length
+    ?`Plan <b>${ozet(topla(hafta,"dk"),topla(hafta,"soru"))||"—"}</b> · Yapılan <b>${ozet(topla(yapCk,"dk"),topla(yapCk,"soru"))||"—"}</b>`:"";
+  $("pr-gunler").innerHTML=gunler.map(g=>{
+    const l=hafta.filter(p=>p.tarih===g);
+    if(!KOC&&!l.length)return "";
+    const gunAd=new Date(g+"T00:00").toLocaleDateString("tr-TR",{weekday:"long"});
+    return `<div class="pr-gun${g===bugun?" bugun":g<bugun?" gecmis":""}">
+      <div class="pr-gun-bas"><b>${gunAd}</b><small>${kisaGun(g)}</small>
+        ${KOC?`<button type="button" class="pr-ekle" data-gun="${g}" aria-label="${gunAd} gününe ekle">＋ Ekle</button>`:""}</div>
+      ${l.map(p=>madde(p,bugun)).join("")}
+    </div>`;
+  }).join("")||`<div class="dn-empty">Bu hafta için program yok.</div>`;
+  $("pr-kopya").hidden=!KOC||hafta.length>0||!program.some(p=>p.tarih>=gunEkle(ilk,-7)&&p.tarih<ilk);
 }
 function programGonder(){
   localStorage.setItem(PRG_KEY,JSON.stringify(program));renderProgram();
-  api("program",KOC,{method:"PUT",body:JSON.stringify(program)})
-    .then(r=>{if(!r.ok)throw r;}).catch(()=>showToast("Program gönderilemedi, internetini kontrol et.","warn"));
+  api("program/"+OGR,{method:"PUT",body:JSON.stringify(program)})
+    .catch(e=>showToast("Program gönderilemedi: "+e.message,"warn"));
 }
+function prAc(p){
+  prDuzen=p.id?p:null;
+  $("pr-dlg-baslik").textContent=prDuzen?"Maddeyi düzenle":"Programa ekle";
+  $("pr-tarih").value=p.tarih;
+  if(prDuzen)$("pr-ders").value=`${p.ex}|${p.ders}`;
+  $("pr-not").value=p.not||"";$("pr-dk").value=p.dk||"";$("pr-soru").value=p.soru||"";
+  $("pr-sil").hidden=!prDuzen;
+  $("pr-dlg").showModal();
+}
+$("pr-gunler").addEventListener("click",e=>{
+  const ekle=e.target.closest(".pr-ekle"),pm=e.target.closest("button.pm"),bas=e.target.closest(".pm-basla");
+  if(ekle)prAc({tarih:ekle.dataset.gun});
+  else if(pm)prAc(program.find(p=>p.id===pm.dataset.id));
+  else if(bas)sayacBaslat(bas.dataset.ders);
+});
 $("pr-form").addEventListener("submit",e=>{
   e.preventDefault();
   const [ex,ders]=$("pr-ders").value.split("|");
-  program.push({id:Date.now()+"",tarih:$("pr-tarih").value,ex,ders,not:$("pr-not").value.trim(),
-    dk:Math.max(0,Math.round(+$("pr-dk").value||0)),soru:Math.max(0,Math.round(+$("pr-soru").value||0))});
-  $("pr-not").value=$("pr-dk").value=$("pr-soru").value="";
-  programGonder();
+  const v={tarih:$("pr-tarih").value,ex,ders,not:$("pr-not").value.trim(),
+    dk:Math.max(0,Math.round(+$("pr-dk").value||0)),soru:Math.max(0,Math.round(+$("pr-soru").value||0))};
+  if(prDuzen)Object.assign(prDuzen,v);else program.push({id:Date.now()+"",...v});
+  $("pr-dlg").close();programGonder();
 });
-$("programListe").addEventListener("click",e=>{
-  const b=e.target.closest(".dn-del");if(!b)return;
-  program=program.filter(p=>p.id!==b.dataset.id);programGonder();
-});
+$("pr-sil").onclick=()=>{program=program.filter(p=>p!==prDuzen);$("pr-dlg").close();programGonder();};
+$("pr-kopya").onclick=()=>{
+  const ilk=haftaGunleri()[0],t=Date.now();
+  program.push(...program.filter(p=>p.tarih>=gunEkle(ilk,-7)&&p.tarih<ilk)
+    .map((p,i)=>({...p,id:t+i+"",tarih:gunEkle(p.tarih,7)})));
+  programGonder();showToast("Geçen haftanın programı kopyalandı.","success");
+};
+$("pr-geri").onclick=()=>{haftaOfset--;renderProgram();};
+$("pr-ileri").onclick=()=>{haftaOfset++;renderProgram();};
 
 function renderBugunSekme(){
   renderProgram();renderGecmis();syCiz();
   const l=calismalar.filter(c=>c.tarih===bugunYmd());
-  $("sy-bugun").textContent="Bugün toplam: "+(ozet(l.reduce((s,c)=>s+c.dk,0),l.reduce((s,c)=>s+c.soru,0))||"henüz kayıt yok");
+  $("sy-bugun").textContent="Bugün toplam: "+(ozet(topla(l,"dk"),topla(l,"soru"))||"henüz kayıt yok");
 }
 
-// ---- senkron (Cloudflare Pages Function + KV, functions/api/[tur].js) ----
-// ponytail: tek gizli kod hem öğrenciye hem koça okuma+yazma verir; ayrı yetki gerekirse koç için ikinci kod.
-const api=(tur,kod,opt)=>fetch(`/api/${tur}?k=${encodeURIComponent(kod)}`,{cache:"no-store",...opt});
-let sonGonderilen="";
-function senkron(acil){
-  const kod=localStorage.getItem(PAYLAS_KEY);
-  if(!kod||KOC)return Promise.resolve(false);
+// ---- sunucu: hesap + senkron (worker.js) ----
+// Öğrenci verisinin tamamı tek anlık görüntü olarak gider; yeni olan kazanır.
+// ponytail: iki cihazda aynı anda çevrimdışı değişiklik yapılırsa eski olan kaybolur; gerekirse kayıt bazında birleştirme.
+function api(yol,opt={}){
+  return fetch("/api/"+yol,{cache:"no-store",...opt,
+    headers:{"content-type":"application/json",...(oturum?{authorization:"Bearer "+oturum.token}:{})}})
+    .then(async r=>{
+      if(r.status===401&&oturum){localStorage.removeItem(OTURUM_KEY);location.reload();}
+      const v=r.status===204?null:await r.json().catch(()=>null);
+      if(!r.ok)throw new Error((v&&v.hata)||"Sunucuya ulaşılamadı.");
+      return v;
+    });
+}
+const yerelDolu=()=>calismalar.length>0||denemeler.length>0||Object.values(state).some(r=>r.s||r.t||r.m);
+function anlik(){
   const data={};
   BACKUP_KEYS.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)try{data[k]=JSON.parse(v)}catch{}});
-  const govde=JSON.stringify(data);
+  return data;
+}
+function veriYukle(s){
+  BACKUP_KEYS.forEach(k=>k in s.data?localStorage.setItem(k,JSON.stringify(s.data[k])):localStorage.removeItem(k));
+  localStorage.setItem(VERI_TS_KEY,s.ts);
+  location.reload();
+}
+let sonGonderilen=null;
+function senkron(acil){
+  if(!oturum||KOC)return Promise.resolve(true);
+  const data=anlik(),govde=JSON.stringify(data);
   if(govde===sonGonderilen)return Promise.resolve(true);
-  const body=JSON.stringify({ts:Date.now(),data});
-  return api("veri",kod,{method:"PUT",body,keepalive:!!acil&&body.length<60000})   // keepalive gövde sınırı 64 KB
-    .then(r=>{if(r.ok)sonGonderilen=govde;return r.ok;}).catch(()=>false);
+  const ts=Date.now(),body=JSON.stringify({ts,data});
+  return api("veri/"+OGR,{method:"PUT",body,keepalive:!!acil&&body.length<60000})   // keepalive gövde sınırı 64 KB
+    .then(()=>{sonGonderilen=govde;localStorage.setItem(VERI_TS_KEY,ts);return true;})
+    .catch(()=>false);
+}
+function veriCek(){
+  if(!OGR)return;
+  api("veri/"+OGR).then(s=>{
+    const yerelTs=+localStorage.getItem(VERI_TS_KEY)||0;
+    if(KOC){if(s&&s.ts!==yerelTs)veriYukle(s);else kocBantCiz(s);return;}
+    if(!s||s.ts<=yerelTs){if(s&&s.ts===yerelTs)sonGonderilen=JSON.stringify(s.data);senkron();return;}
+    // hesapta daha yeni veri var; bu cihazda hiç gönderilmemiş veri de varsa hangisi kalsın diye sor
+    if(!yerelTs&&yerelDolu()&&confirm("Bu cihazda hesabına yüklenmemiş veriler var.\n\nTamam: bu cihazdakiler hesabına yüklensin.\nİptal: hesabındaki veriler bu cihaza gelsin."))senkron();
+    else veriYukle(s);
+  }).catch(()=>{if(KOC)kocBantCiz();});
 }
 function programCek(){
-  const kod=KOC||localStorage.getItem(PAYLAS_KEY);if(!kod)return;
-  api("program",kod).then(r=>r.ok?r.json():null).then(p=>{
-    if(!Array.isArray(p))return;
-    program=p;localStorage.setItem(PRG_KEY,JSON.stringify(p));renderProgram();
+  if(!OGR)return;
+  api("program/"+OGR).then(p=>{
+    program=Array.isArray(p)?p:[];localStorage.setItem(PRG_KEY,JSON.stringify(program));renderProgram();
   }).catch(()=>{});
 }
-function kocVeriCek(){
-  api("veri",KOC).then(r=>r.ok?r.json():Promise.reject()).then(s=>{
-    if(!s){showToast("Öğrenci henüz veri göndermemiş.","info");return;}
-    if(String(s.ts)===localStorage.getItem(KOC_TS_KEY))return;
-    BACKUP_KEYS.forEach(k=>k in s.data?localStorage.setItem(k,JSON.stringify(s.data[k])):localStorage.removeItem(k));
-    localStorage.setItem(KOC_TS_KEY,s.ts);
-    location.reload();
-  }).catch(()=>showToast("Öğrencinin verisine ulaşılamadı.","warn"));
+function profilYenile(){
+  api("ben").then(p=>{
+    oturum={...oturum,...p};localStorage.setItem(OTURUM_KEY,JSON.stringify(oturum));
+    if(KOC&&kocOgr(oturum)!==OGR){CIHAZ_KEYS.filter(k=>k!==KOC_OGR_KEY).forEach(k=>localStorage.removeItem(k));location.reload();return;}
+    renderHesap();renderProgram();kocBantCiz();
+  }).catch(()=>{});
 }
-if(KOC){
-  const ts=+localStorage.getItem(KOC_TS_KEY);
-  $("koc-bilgi").textContent="👀 Koç modu — öğrencinin verisi"+(ts?" · son güncelleme "+new Date(ts).toLocaleString("tr-TR",{dateStyle:"short",timeStyle:"short"}):"")+". Buradaki değişiklikler öğrenciye gitmez (program hariç).";
-  $("pr-tarih").value=bugunYmd();
-  $("koc-cik").onclick=()=>{
-    if(!confirm("Koç modundan çıkılsın mı? Bu cihazdaki öğrenci verisi kopyası silinir."))return;
-    [...BACKUP_KEYS,KOC_KEY,KOC_TS_KEY,PRG_KEY].forEach(k=>localStorage.removeItem(k));
-    location.reload();
-  };
-  kocVeriCek();
-}else{
-  senkron();
-  setInterval(senkron,60000);   // KV ücretsiz kotası günde 1000 yazma; değişiklik yoksa istek atılmaz
-}
-programCek();
-document.addEventListener("visibilitychange",()=>{
-  if(document.hidden)senkron(true);
-  else{programCek();if(KOC)kocVeriCek();renderBugunSekme();}
+
+// ---- giriş / hesap ----
+let gMod="giris";
+$("g-gecis").onclick=()=>{
+  gMod=gMod==="giris"?"kayit":"giris";
+  const k=gMod==="kayit";
+  $("g-baslik").textContent=$("g-gonder").textContent=k?"Hesap oluştur":"Giriş yap";
+  $("g-gecis").textContent=k?"Hesabın var mı? Giriş yap":"Hesabın yok mu? Hesap oluştur";
+  $("g-rol").hidden=!k;
+  $("g-sifre").autocomplete=k?"new-password":"current-password";
+  $("g-hata").textContent="";
+};
+$("g-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  $("g-hata").textContent="";$("g-gonder").disabled=true;
+  api(gMod,{method:"POST",body:JSON.stringify({ad:$("g-ad").value,sifre:$("g-sifre").value,
+    rol:(document.querySelector('[name="rol"]:checked')||{}).value})})
+    .then(p=>{
+      if(p.rol==="koc"){
+        if(yerelDolu()&&!confirm("Koç hesabıyla girince bu cihazdaki öğrenci verileri silinir. Devam?"))return;
+        CIHAZ_KEYS.forEach(k=>localStorage.removeItem(k));
+      }
+      localStorage.setItem(OTURUM_KEY,JSON.stringify(p));location.reload();
+    })
+    .catch(err=>{$("g-hata").textContent=err.message;})
+    .finally(()=>{$("g-gonder").disabled=false;});
 });
-
-// ---- ayarlar: koçla paylaşım ----
-const kocLinki=k=>location.origin+location.pathname+"?koc="+k;
-function renderPaylas(){
-  const k=localStorage.getItem(PAYLAS_KEY);
-  $("paylas-durum").textContent=k
-    ?"Paylaşım açık. Bu bağlantıyı açan kişi çalışmalarını, konularını ve denemelerini görebilir, sana program yazabilir. Sadece koçunla paylaş."
-    :"Açarsan koçun çalışmalarını görebilir ve sana program yazabilir. Veriler sana özel gizli bir bağlantıyla paylaşılır.";
-  $("paylas-link").hidden=!k;$("paylas-link").value=k?kocLinki(k):"";
-  $("paylas-ac").hidden=!!k;$("paylas-kopya").hidden=$("paylas-kapat").hidden=!k;
+function renderHesap(){
+  if(!oturum)return;
+  $("hesap-bilgi").innerHTML=KOC
+    ?`Koç hesabı: <b>${esc(oturum.ad)}</b>. Öğrencin Ayarlar → Hesap kısmına bu kullanıcı adını yazınca burada görünür.`
+      +(oturum.ogrenciler.length?` Öğrencilerin: ${oturum.ogrenciler.map(esc).join(", ")}.`:"")
+    :`Kullanıcı adın: <b>${esc(oturum.ad)}</b>. `+(oturum.koc
+      ?`Koçun: <b>${esc(oturum.koc)}</b> — çalışmalarını görebilir ve sana program yazabilir.`
+      :"Koçunun kullanıcı adını yazarsan çalışmalarını görebilir ve sana program yazabilir.");
+  $("koc-form").hidden=!!oturum.koc;$("koc-kaldir").hidden=!oturum.koc;
 }
-$("paylas-ac").onclick=()=>{
-  localStorage.setItem(PAYLAS_KEY,[...crypto.getRandomValues(new Uint8Array(16))].map(b=>b.toString(16).padStart(2,"0")).join(""));
-  renderPaylas();
-  senkron().then(ok=>showToast(ok?"Paylaşım açıldı. Bağlantıyı koçuna gönder.":"Sunucuya ulaşılamadı, internet gelince tekrar denenecek.",ok?"success":"warn"));
+function kocBagla(koc){
+  return api("koc",{method:"PUT",body:JSON.stringify({koc})}).then(p=>{
+    oturum={...oturum,...p};localStorage.setItem(OTURUM_KEY,JSON.stringify(oturum));
+    renderHesap();renderProgram();
+  });
+}
+$("koc-form").addEventListener("submit",e=>{
+  e.preventDefault();
+  kocBagla($("koc-ad").value).then(()=>{$("koc-ad").value="";programCek();showToast("Koçun bağlandı 🤝","success");})
+    .catch(err=>showToast(err.message,"warn"));
+});
+$("koc-kaldir").onclick=()=>{
+  if(!confirm("Koç bağlantısı kaldırılsın mı? Koçun artık çalışmalarını göremez."))return;
+  kocBagla(null).then(()=>showToast("Koç bağlantısı kaldırıldı.","info")).catch(err=>showToast(err.message,"warn"));
 };
-$("paylas-kopya").onclick=()=>{
-  const url=$("paylas-link").value;
-  if(navigator.share)navigator.share({title:"YKS Takip — koç bağlantısı",url}).catch(()=>{});
-  else navigator.clipboard.writeText(url).then(()=>showToast("Bağlantı kopyalandı.","success"));
+$("cikis").onclick=async()=>{
+  if(!confirm("Çıkış yapılsın mı? Bu cihazdaki veriler silinir, hesabındaki kopya durur."))return;
+  if(!(await senkron())&&!confirm("Son değişikliklerin hesabına gönderilemedi (internet yok). Yine de çıkılsın mı? Gönderilmeyenler kaybolur."))return;
+  await api("cikis",{method:"POST"}).catch(()=>{});
+  [...CIHAZ_KEYS,OTURUM_KEY].forEach(k=>localStorage.removeItem(k));
+  location.reload();
 };
-$("paylas-kapat").onclick=()=>{
-  if(!confirm("Paylaşım kapatılsın mı? Koçun artık verini göremez, sunucudaki kopya ve program silinir."))return;
-  api("veri",localStorage.getItem(PAYLAS_KEY),{method:"DELETE"}).catch(()=>{});
-  [PAYLAS_KEY,PRG_KEY].forEach(k=>localStorage.removeItem(k));
-  program=[];sonGonderilen="";renderPaylas();renderProgram();
+function kocBantCiz(s){
+  if(!KOC)return;
+  const sel=$("koc-ogr");
+  sel.hidden=oturum.ogrenciler.length<2;
+  sel.innerHTML=oturum.ogrenciler.map(a=>`<option${a===OGR?" selected":""}>${esc(a)}</option>`).join("");
+  const ts=s===undefined?+localStorage.getItem(VERI_TS_KEY):s&&s.ts;
+  $("koc-bilgi").textContent=!OGR
+    ?`Henüz öğrencin yok. Öğrencin Ayarlar → Hesap kısmına kullanıcı adını (${oturum.ad}) yazınca burada görünecek.`
+    :`👀 ${OGR} · `+(ts?"son güncelleme "+new Date(ts).toLocaleString("tr-TR",{dateStyle:"short",timeStyle:"short"}):"henüz veri göndermedi");
+}
+$("koc-ogr").onchange=e=>{
+  CIHAZ_KEYS.forEach(k=>localStorage.removeItem(k));
+  localStorage.setItem(KOC_OGR_KEY,e.target.value);location.reload();
 };
 
-$("ck-tarih").value=bugunYmd();
-konuListesi();renderPaylas();renderBugunSekme();
+if(oturum){
+  konuListesi();renderHesap();kocBantCiz();renderBugunSekme();
+  veriCek();programCek();profilYenile();
+  if(!KOC)setInterval(senkron,60000);   // KV ücretsiz kotası günde 1000 yazma; değişiklik yoksa istek atılmaz
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden)senkron(true);
+    else{veriCek();programCek();renderBugunSekme();}
+  });
+}
 
 // çevrimdışı destek — file:// ile açıldığında sessizce atlanır
 if("serviceWorker" in navigator)

@@ -6,7 +6,7 @@ Cloudflare Workers üzerinden yayınlanır: https://yks-takip.doganaym22.workers
 
 ## Ne yapar
 
-- **Bugün** — çalışma sayacı (sayfa kapansa da akar), günlük çalışma kaydı (ders, konu, süre, soru), gün gün çalışma geçmişi, koçun programı.
+- **Bugün** — koçun haftalık programı (hedef/yapılan ilerlemesi, ▶ ile sayacı başlatma), çalışma sayacı (sayfa kapansa da akar), çalışma kaydı (ders, konu, süre, soru), gün gün geçmiş.
 - **Konular** — TYT/AYT konu listesi. Her konu için: kaç kez çalıştın, kaç test çözdün, konuyu ne kadar öğrendiğini düşünüyorsun (0–100%).
 - **İstatistik** — genel ilerleme halkası, ders bazlı öğrenme grafiği, 12 haftalık çalışma ısı haritası, TYT/AYT karşılaştırması.
 - **Denemeler** — deneme sınavı ekle, ders bazlı doğru/yanlış gir, net otomatik hesaplanır (D − Y/4), net trend grafiği.
@@ -20,13 +20,11 @@ Canlı adresi aç, ya da `index.html` dosyasını indirip çift tıkla. İkisi d
 
 ## Veri
 
-Veriler tarayıcıya kaydedilir, hiçbir yere gönderilmez. Başka bir cihaza taşımak için: **Ayarlar → Yedek indir**, diğer cihazda **Geri yükle**.
+Veriler cihazda tutulur ve hesaba senkron edilir (çevrimdışıyken de çalışır, internet gelince gönderir). Elle yedek için: **Ayarlar → Yedek indir / Geri yükle**.
 
-> Not: Aynı adresi farklı tarayıcı veya cihazda açarsan veriler ayrı olur.
+### Hesap ve koç
 
-### Koç bağlantısı
-
-Öğrenci **Ayarlar → Koç bağlantısı → Koçla paylaşmayı aç** der, çıkan bağlantıyı koça gönderir. Koç bağlantıyı açınca öğrencinin verisini salt okunur görür ve **Bugün** sekmesinden program yazar. Veri `worker.js` üzerinden Cloudflare KV'de (`YKS` binding), tahmin edilemez bir kodla saklanır; öğrenci paylaşımı kapatınca silinir.
+Uygulama kullanıcı adı + şifreyle açılır (öğrenci ya da koç hesabı). Öğrencinin verisi hesabına senkron olur; hangi cihaz/tarayıcı olursa olsun giriş yapınca gelir. Öğrenci **Ayarlar → Hesap** kısmına koçunun kullanıcı adını yazar; koç o öğrencinin her şeyini görür ve **Bugün** sekmesinde haftalık program yazar. Sunucu `worker.js`, veri Cloudflare KV'de (`YKS` binding), şifreler PBKDF2 ile saklanır.
 
 ## Teknik
 
